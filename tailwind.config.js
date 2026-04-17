@@ -29,6 +29,7 @@ export default {
         },
       },
       fontFamily: {
+        logo: ['Righteous', 'sans-serif'],
         display: ['Space Grotesk', 'sans-serif'],
         body:    ['Inter', 'sans-serif'],
       },
