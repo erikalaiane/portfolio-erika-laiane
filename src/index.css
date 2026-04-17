@@ -1,3 +1,7 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import '@fontsource/space-grotesk';
+
+body {
+  background-color: #0B0B0F;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+}
