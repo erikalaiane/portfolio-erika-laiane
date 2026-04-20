@@ -20,8 +20,8 @@ const infos = [
 
 export default function Hero() {
   return (
-    <section className="min-h-screen flex flex-col justify-center px-6  pb-8 relative z-10">
-      <div className="max-w-6xl mx-auto w-full flex flex-col gap-3">
+  <section className="flex flex-col justify-center px-6 pb-5 pt-24 relative z-10">  
+  <div className="max-w-6xl mx-auto w-full flex flex-col gap-3">
 
         {/* ── BANNER PRINCIPAL ── */}
         <motion.div

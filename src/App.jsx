@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import StarsBg from './components/StarsBg'
+import Marquee from './components/Marquee'
 
 export default function App() {
   return (
@@ -8,6 +9,7 @@ export default function App() {
       <StarsBg />
       <Navbar />
       <Hero />
+      <Marquee />
     </div>
   )
 }
