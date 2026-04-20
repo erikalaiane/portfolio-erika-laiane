@@ -5,9 +5,9 @@ export default {
     extend: {
       colors: {
         bg: {
-          primary: '#0B0B0F',
-          secondary: '#151521',
-          tertiary: '#1a1a2e',
+          primary: '#111827',   // era #0B0B0F
+          secondary: '#161b27',
+          tertiary: '#1c2333',
         },
         purple: {
           deep:    '#3b1fa8',
@@ -29,9 +29,9 @@ export default {
         },
       },
       fontFamily: {
-        logo: ['Righteous', 'sans-serif'],
-        display: ['Space Grotesk', 'sans-serif'],
-        body:    ['Inter', 'sans-serif'],
+        display: ['Bebas Neue', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+        logo: ['Abril Fatface', 'serif'],
       },
     },
   },
