@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion'
 import aboutImg from '../assets/images/about.jpg'
+import SectionHeader from '../components/SectionHeader'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -14,14 +15,16 @@ const skills = [
   { name: 'React',       icon: 'https://cdn.simpleicons.org/react/61DAFB',             area: 'Front-End'   },
   { name: 'JavaScript',  icon: 'https://cdn.simpleicons.org/javascript/F7DF1E',        area: 'Front-End'   },
   { name: 'HTML5',       icon: 'https://cdn.simpleicons.org/html5/E34F26',             area: 'Front-End'   },
-  { name: 'CSS3',        icon: 'https://cdn.simpleicons.org/css3/1572B6',              area: 'Front-End'   },
+  { name: 'CSS3',        icon: null,    svg: <svg viewBox="0 0 24 24" width="16" height="16" fill="#1572B6"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.413l.213 2.622 10.125 0-.255 2.716-6.64 0 .24 2.573 6.182 0-.366 3.523-3.9 1.033-3.38-.937-.235-2.621-2.44 0 .5 5.045 5.57 1.622 5.64-1.626.78-7.63z"/></svg>,
+  area: 'Front-End'},
   { name: 'Tailwind',    icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4',       area: 'Front-End'   },
   { name: 'Python',      icon: 'https://cdn.simpleicons.org/python/3776AB',            area: 'Back-End'    },
   { name: 'MySQL',       icon: 'https://cdn.simpleicons.org/mysql/4479A1',             area: 'Back-End'    },
   { name: 'Git',         icon: 'https://cdn.simpleicons.org/git/F05032',               area: 'Ferramentas' },
   { name: 'GitHub',      icon: 'https://cdn.simpleicons.org/github/ffffff',            area: 'Ferramentas' },
   { name: 'Figma',       icon: 'https://cdn.simpleicons.org/figma/F24E1E',             area: 'Ferramentas' },
-  { name: 'VS Code',     icon: 'https://cdn.simpleicons.org/visualstudiocode/007ACC',  area: 'Ferramentas' },
+  { name: 'VS Code',     icon: null,  svg: <svg viewBox="0 0 24 24" width="16" height="16" fill="#007ACC"><path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 0 0-1.276.057L.327 7.261A1 1 0 0 0 .326 8.74L3.899 12 .326 15.26a1 1 0 0 0 .001 1.479L1.65 17.94a.999.999 0 0 0 1.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 0 0 1.704.29l4.942-2.377A1.5 1.5 0 0 0 24 19.881V4.119a1.5 1.5 0 0 0-.85-1.532zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"/></svg>,
+  area: 'Ferramentas'},
   { name: 'Vite',        icon: 'https://cdn.simpleicons.org/vite/646CFF',              area: 'Ferramentas' },
 ]
 
@@ -109,19 +112,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto relative z-10">
 
         {/* Cabeçalho da seção */}
-        <motion.div
-          className="flex items-center gap-4 mb-16"
-          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}
-        >
-          <span style={{
-            fontFamily: "'Courier New', monospace",
-            fontSize: '10px', color: 'rgba(167,139,250,0.7)',
-            letterSpacing: '0.3em', textTransform: 'uppercase'
-          }}>
-            ✦ 01 — sobre
-          </span>
-          <div style={{ flex: 1, height: '0.5px', background: 'rgba(139,92,246,0.2)' }} />
-        </motion.div>
+       <SectionHeader number="01" title="sobre" />
 
         {/* GRID PRINCIPAL */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
@@ -378,11 +369,13 @@ export default function About() {
                             e.currentTarget.style.transform = 'translateY(0)'
                           }}
                         >
-                          <img
-                            src={s.icon}
-                            alt={s.name}
-                            style={{ width: '16px', height: '16px', objectFit: 'contain' }}
-                          />
+                          {s.svg ? s.svg : (
+                            <img
+                              src={s.icon}
+                              alt={s.name}
+                              style={{ width: '16px', height: '16px', objectFit: 'contain' }}
+                            />
+                          )}
                           <span style={{
                             fontFamily: "'Inter', sans-serif",
                             fontSize: '13px', fontWeight: 500,

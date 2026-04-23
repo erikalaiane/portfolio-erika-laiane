@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import contactImg from '../assets/images/contact.jpg'
+import SectionHeader from '../components/SectionHeader'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -13,8 +14,7 @@ const fadeUp = {
 
 const socialLinks = [
   { label: 'GitHub',    handle: '@erikalaiane',          url: 'https://github.com/erikalaiane',                  icon: 'https://cdn.simpleicons.org/github/ffffff',   color: '#c4b5fd' },
-  { label: 'LinkedIn',  handle: 'erika-laiane-azevedo',  url: 'https://www.linkedin.com/in/erika-laiane-azevedo', icon: 'https://cdn.simpleicons.org/linkedin/38bdf8', color: '#38bdf8' },
-  { label: 'Instagram', handle: '@laianerika',         url: 'https://www.instagram.com/laianerika/',              icon: 'https://cdn.simpleicons.org/instagram/f472b6',color: '#f472b6' },
+{ label: 'LinkedIn', handle: 'erika-laiane-azevedo', url: 'https://www.linkedin.com/in/erika-laiane-azevedo', icon: null, svg: <svg viewBox="0 0 24 24" width="13" height="13" fill="#38bdf8"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>, color: '#38bdf8' },  { label: 'Instagram', handle: '@laianerika',         url: 'https://www.instagram.com/laianerika/',              icon: 'https://cdn.simpleicons.org/instagram/f472b6',color: '#f472b6' },
   { label: 'Email',     handle: 'erikalaianeazevedo...', url: 'mailto:erikalaianeazevedosantos@gmail.com',        icon: 'https://cdn.simpleicons.org/gmail/fb923c',    color: '#fb923c' },
 ]
 
@@ -58,15 +58,7 @@ export default function Contact() {
 
       <div className="max-w-6xl mx-auto relative z-10">
 
-        <motion.div className="flex items-center gap-4 mb-16"
-          variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-          <span style={{
-            fontFamily: "'Courier New', monospace",
-            fontSize: '11px', color: '#c4b5fd',
-            letterSpacing: '0.3em', textTransform: 'uppercase', fontWeight: 700,
-          }}>✦ 03 — contato</span>
-          <div style={{ flex: 1, height: '0.5px', background: 'rgba(139,92,246,0.25)' }} />
-        </motion.div>
+        <SectionHeader number="04" title="contato" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
@@ -190,11 +182,13 @@ export default function Contact() {
                   }}
                 >
                   <div className="flex items-center gap-2 mb-2">
-                    <img
-                      src={link.icon}
-                      alt={link.label}
-                      style={{ width: '13px', height: '13px', objectFit: 'contain' }}
-                    />
+                    {link.svg ? link.svg : (
+                        <img
+                            src={link.icon}
+                            alt={link.label}
+                            style={{ width: '13px', height: '13px', objectFit: 'contain' }}
+                        />
+                        )}
                     <span style={{
                       fontFamily: "'Courier New', monospace",
                       fontSize: '9px', color: link.color,
