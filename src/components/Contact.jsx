@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import contactImg from '../assets/images/contact.jpg'
 import SectionHeader from '../components/SectionHeader'
@@ -14,13 +14,25 @@ const fadeUp = {
 
 const socialLinks = [
   { label: 'GitHub',    handle: '@erikalaiane',          url: 'https://github.com/erikalaiane',                  icon: 'https://cdn.simpleicons.org/github/ffffff',   color: '#c4b5fd' },
-{ label: 'LinkedIn', handle: 'erika-laiane-azevedo', url: 'https://www.linkedin.com/in/erika-laiane-azevedo', icon: null, svg: <svg viewBox="0 0 24 24" width="13" height="13" fill="#38bdf8"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>, color: '#38bdf8' },  { label: 'Instagram', handle: '@laianerika',         url: 'https://www.instagram.com/laianerika/',              icon: 'https://cdn.simpleicons.org/instagram/f472b6',color: '#f472b6' },
-  { label: 'Email',     handle: 'erikalaianeazevedo...', url: 'mailto:erikalaianeazevedosantos@gmail.com',        icon: 'https://cdn.simpleicons.org/gmail/fb923c',    color: '#fb923c' },
+  { label: 'LinkedIn',  handle: 'erika-laiane-azevedo',  url: 'https://www.linkedin.com/in/erika-laiane-azevedo', icon: null, svg: <svg viewBox="0 0 24 24" width="13" height="13" fill="#38bdf8"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>, color: '#38bdf8' },
+  { label: 'Instagram', handle: '@laianerika',            url: 'https://www.instagram.com/laianerika/',            icon: 'https://cdn.simpleicons.org/instagram/f472b6', color: '#f472b6' },
+  { label: 'Email',     handle: 'erikalaianeazevedo...', url: 'mailto:erikalaianeazevedosantos@gmail.com',         icon: 'https://cdn.simpleicons.org/gmail/fb923c',     color: '#fb923c' },
 ]
 
 export default function Contact() {
   const [sent, setSent] = useState(false)
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [repoCount, setRepoCount] = useState(null)
+
+  useEffect(() => {
+    const token = import.meta.env.VITE_GITHUB_TOKEN
+    const headers = token ? { Authorization: `Bearer ${token}` } : {}
+
+    fetch('https://api.github.com/users/erikalaiane', { headers })
+      .then(r => r.ok ? r.json() : null)
+      .then(data => { if (data) setRepoCount(data.public_repos) })
+      .catch(() => {})
+  }, [])
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value })
@@ -62,150 +74,7 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-          {/* ── COLUNA ESQUERDA ── */}
-          <motion.div className="lg:col-span-5 flex flex-col gap-5"
-            variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-
-            {/* Foto */}
-            <div className="relative">
-              <div className="absolute -top-3 -right-3 w-full h-full pointer-events-none"
-                style={{ border: '1px solid rgba(139,92,246,0.25)', borderRadius: '8px' }} />
-              <div className="relative overflow-hidden" style={{ borderRadius: '8px', aspectRatio: '4/5' }}>
-                <img
-                  src={contactImg}
-                  alt="Érika Laiane"
-                  className="w-full h-full object-cover object-top"
-                  style={{ filter: 'contrast(1.1) brightness(0.8) saturate(0.9)' }}
-                />
-                <div className="absolute inset-0" style={{
-                  background: 'linear-gradient(to top, rgba(5,2,20,0.95) 0%, rgba(5,2,20,0.4) 45%, rgba(5,2,20,0.1) 100%)'
-                }} />
-                <div className="absolute left-5 top-16 bottom-32 w-px"
-                  style={{ background: 'linear-gradient(to bottom, transparent, rgba(167,139,250,0.4), transparent)' }} />
-
-                {/* Badge Open to work */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-2"
-                  style={{
-                    background: 'rgba(10,10,20,0.8)', backdropFilter: 'blur(12px)',
-                    border: '1px solid rgba(74,222,128,0.4)', borderRadius: '4px',
-                  }}>
-                  <span style={{
-                    width: '7px', height: '7px', borderRadius: '50%',
-                    background: '#4ade80', boxShadow: '0 0 8px #4ade80',
-                    display: 'inline-block', animation: 'blink 2s ease-in-out infinite',
-                  }} />
-                  <span style={{
-                    fontFamily: "'Courier New', monospace",
-                    fontSize: '10px', color: '#4ade80',
-                    letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700,
-                  }}>Open to work</span>
-                </div>
-
-                {/* Tag Front-End Dev */}
-                <div className="absolute top-4 right-4 px-3 py-2"
-                  style={{
-                    background: 'rgba(10,10,20,0.8)', backdropFilter: 'blur(8px)',
-                    border: '1px solid rgba(167,139,250,0.4)', borderRadius: '4px',
-                  }}>
-                  <span style={{
-                    fontFamily: "'Courier New', monospace",
-                    fontSize: '10px', color: '#c4b5fd',
-                    letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700,
-                  }}>Front-End Dev</span>
-                </div>
-
-                {/* Texto na foto */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div style={{
-                    fontFamily: "'Courier New', monospace",
-                    fontSize: '10px', color: '#a78bfa',
-                    letterSpacing: '0.3em', textTransform: 'uppercase',
-                    marginBottom: '8px', fontWeight: 700,
-                  }}>disponível para trabalhar</div>
-                  <h2 style={{
-                    fontFamily: "'Abril Fatface', serif",
-                    fontSize: 'clamp(26px, 3.5vw, 40px)',
-                    color: '#ffffff', lineHeight: 1.05,
-                    textShadow: '0 2px 20px rgba(0,0,0,0.8)',
-                  }}>
-                    Vamos criar<br />
-                    <span style={{ color: '#a78bfa' }}>algo juntos</span>
-                    <span style={{ color: '#f472b6' }}>?</span>
-                  </h2>
-                  <div className="flex gap-5 mt-4">
-                    {[
-                      { num: '7+', label: 'projetos' },
-                      { num: '1+', label: 'ano dev' },
-                      { num: '∞',  label: 'criatividade' },
-                    ].map((s) => (
-                      <div key={s.label}>
-                        <div style={{
-                          fontFamily: "'Bebas Neue', sans-serif",
-                          fontSize: '22px', color: '#ffffff', lineHeight: 1,
-                        }}>{s.num}</div>
-                        <div style={{
-                          fontFamily: "'Courier New', monospace",
-                          fontSize: '9px', color: 'rgba(167,139,250,0.7)',
-                          letterSpacing: '0.15em', textTransform: 'uppercase',
-                        }}>{s.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Social links — estilo info cards com logo */}
-            <div className="grid grid-cols-2 gap-3">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.url}
-                  target={link.label !== 'Email' ? '_blank' : undefined}
-                  rel="noreferrer"
-                  style={{
-                    padding: '14px 16px',
-                    background: `${link.color}0d`,
-                    border: `1px solid ${link.color}40`,
-                    borderRadius: '6px',
-                    textDecoration: 'none',
-                    display: 'block',
-                    transition: 'transform 0.2s, border-color 0.2s',
-                  }}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.transform = 'translateY(-2px)'
-                    e.currentTarget.style.borderColor = `${link.color}80`
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.transform = 'translateY(0)'
-                    e.currentTarget.style.borderColor = `${link.color}40`
-                  }}
-                >
-                  <div className="flex items-center gap-2 mb-2">
-                    {link.svg ? link.svg : (
-                        <img
-                            src={link.icon}
-                            alt={link.label}
-                            style={{ width: '13px', height: '13px', objectFit: 'contain' }}
-                        />
-                        )}
-                    <span style={{
-                      fontFamily: "'Courier New', monospace",
-                      fontSize: '9px', color: link.color,
-                      letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700,
-                    }}>{link.label}</span>
-                  </div>
-                  <div style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '12px', color: '#f0ecff',
-                    fontWeight: 600, lineHeight: 1.3,
-                  }}>{link.handle}</div>
-                </a>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* ── COLUNA DIREITA — formulário ── */}
+          {/* ── COLUNA ESQUERDA — formulário ── */}
           <motion.div className="lg:col-span-7 flex flex-col gap-6"
             variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
 
@@ -367,6 +236,151 @@ export default function Contact() {
                 fontSize: '10px', color: 'rgba(255,255,255,0.4)',
                 letterSpacing: '0.2em', display: 'block', marginTop: '10px', fontWeight: 600,
               }}>— ÉRIKA LAIANE · RJ, 2025</span>
+            </div>
+          </motion.div>
+
+          {/* ── COLUNA DIREITA ── */}
+          <motion.div className="lg:col-span-5 flex flex-col gap-5"
+            variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+
+            <div className="relative">
+              <div className="absolute -top-3 -right-3 w-full h-full pointer-events-none"
+                style={{ border: '1px solid rgba(139,92,246,0.25)', borderRadius: '8px' }} />
+              <div className="relative overflow-hidden" style={{ borderRadius: '8px', aspectRatio: '4/5' }}>
+                <img
+                  src={contactImg}
+                  alt="Érika Laiane"
+                  className="w-full h-full object-cover object-top"
+                  style={{ filter: 'contrast(1.1) brightness(0.8) saturate(0.9)' }}
+                />
+                <div className="absolute inset-0" style={{
+                  background: 'linear-gradient(to top, rgba(5,2,20,0.95) 0%, rgba(5,2,20,0.4) 45%, rgba(5,2,20,0.1) 100%)'
+                }} />
+                <div className="absolute left-5 top-16 bottom-32 w-px"
+                  style={{ background: 'linear-gradient(to bottom, transparent, rgba(167,139,250,0.4), transparent)' }} />
+
+                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-2"
+                  style={{
+                    background: 'rgba(10,10,20,0.8)', backdropFilter: 'blur(12px)',
+                    border: '1px solid rgba(74,222,128,0.4)', borderRadius: '4px',
+                  }}>
+                  <span style={{
+                    width: '7px', height: '7px', borderRadius: '50%',
+                    background: '#4ade80', boxShadow: '0 0 8px #4ade80',
+                    display: 'inline-block', animation: 'blink 2s ease-in-out infinite',
+                  }} />
+                  <span style={{
+                    fontFamily: "'Courier New', monospace",
+                    fontSize: '10px', color: '#4ade80',
+                    letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700,
+                  }}>Open to work</span>
+                </div>
+
+                <div className="absolute top-4 right-4 px-3 py-2"
+                  style={{
+                    background: 'rgba(10,10,20,0.8)', backdropFilter: 'blur(8px)',
+                    border: '1px solid rgba(167,139,250,0.4)', borderRadius: '4px',
+                  }}>
+                  <span style={{
+                    fontFamily: "'Courier New', monospace",
+                    fontSize: '10px', color: '#c4b5fd',
+                    letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700,
+                  }}>Front-End Dev</span>
+                </div>
+
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div style={{
+                    fontFamily: "'Courier New', monospace",
+                    fontSize: '10px', color: '#a78bfa',
+                    letterSpacing: '0.3em', textTransform: 'uppercase',
+                    marginBottom: '8px', fontWeight: 700,
+                  }}>disponível para trabalhar</div>
+                  <h2 style={{
+                    fontFamily: "'Abril Fatface', serif",
+                    fontSize: 'clamp(26px, 3.5vw, 40px)',
+                    color: '#ffffff', lineHeight: 1.05,
+                    textShadow: '0 2px 20px rgba(0,0,0,0.8)',
+                  }}>
+                    Vamos criar<br />
+                    <span style={{ color: '#a78bfa' }}>algo juntos</span>
+                    <span style={{ color: '#f472b6' }}>?</span>
+                  </h2>
+
+                  {/* ✅ Stats com repoCount dinâmico */}
+                  <div className="flex gap-5 mt-4">
+                    {[
+                      {
+                        num: repoCount !== null ? `${repoCount}+` : '...',
+                        label: 'repositórios',
+                      },
+                      { num: '1+', label: 'ano dev' },
+                      { num: '∞',  label: 'criatividade' },
+                    ].map((s) => (
+                      <div key={s.label}>
+                        <div style={{
+                          fontFamily: "'Bebas Neue', sans-serif",
+                          fontSize: '22px', color: '#ffffff', lineHeight: 1,
+                          transition: 'opacity 0.3s',
+                          opacity: s.num === '...' ? 0.4 : 1,
+                        }}>{s.num}</div>
+                        <div style={{
+                          fontFamily: "'Courier New', monospace",
+                          fontSize: '9px', color: 'rgba(167,139,250,0.7)',
+                          letterSpacing: '0.15em', textTransform: 'uppercase',
+                        }}>{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.url}
+                  target={link.label !== 'Email' ? '_blank' : undefined}
+                  rel="noreferrer"
+                  style={{
+                    padding: '14px 16px',
+                    background: `${link.color}0d`,
+                    border: `1px solid ${link.color}40`,
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    display: 'block',
+                    transition: 'transform 0.2s, border-color 0.2s',
+                  }}
+                  onMouseEnter={e => {
+                    e.currentTarget.style.transform = 'translateY(-2px)'
+                    e.currentTarget.style.borderColor = `${link.color}80`
+                  }}
+                  onMouseLeave={e => {
+                    e.currentTarget.style.transform = 'translateY(0)'
+                    e.currentTarget.style.borderColor = `${link.color}40`
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    {link.svg ? link.svg : (
+                      <img
+                        src={link.icon}
+                        alt={link.label}
+                        style={{ width: '13px', height: '13px', objectFit: 'contain' }}
+                      />
+                    )}
+                    <span style={{
+                      fontFamily: "'Courier New', monospace",
+                      fontSize: '9px', color: link.color,
+                      letterSpacing: '0.2em', textTransform: 'uppercase', fontWeight: 700,
+                    }}>{link.label}</span>
+                  </div>
+                  <div style={{
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '12px', color: '#f0ecff',
+                    fontWeight: 600, lineHeight: 1.3,
+                  }}>{link.handle}</div>
+                </a>
+              ))}
             </div>
           </motion.div>
         </div>
