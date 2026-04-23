@@ -89,7 +89,7 @@ export default function About() {
   return (
     <section
       id="sobre"
-      className="relative py-24 px-6 overflow-hidden"
+      className="relative pt-12 pb-9 px-6 overflow-hidden"
       style={{ background: 'rgba(17,24,39,0.82)' }}
     >
       {/* Título editorial gigante no fundo */}

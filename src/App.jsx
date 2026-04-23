@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import StarsBg from './components/StarsBg'
 import Marquee from './components/Marquee'
 import About from './components/About'
+import GitHubStats from './components/GitHubStats'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 
@@ -14,6 +15,7 @@ export default function App() {
       <Hero />
       <Marquee />
       <About />
+      <GitHubStats />
       <Projects />
       <Contact />
     </div>
