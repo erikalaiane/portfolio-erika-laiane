@@ -338,7 +338,7 @@ export default function Projects() {
       <section
         id="projetos"
         className="relative w-full  overflow-hidden"
-        style={{ background: '#111827' }}
+        style={{ background: 'rgba(17,24,39,0.82)' }}
       >
         <div
           className="absolute top-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none"

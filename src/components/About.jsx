@@ -90,7 +90,7 @@ export default function About() {
     <section
       id="sobre"
       className="relative py-24 px-6 overflow-hidden"
-      style={{ background: '#111827' }}
+      style={{ background: 'rgba(17,24,39,0.82)' }}
     >
       {/* Título editorial gigante no fundo */}
       <div

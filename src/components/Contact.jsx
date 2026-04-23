@@ -39,7 +39,7 @@ export default function Contact() {
     <section
       id="contato"
       className="relative py-24 px-6 overflow-hidden"
-      style={{ background: '#0d1117' }}
+      style={{ background: 'rgba(13,17,23,0.82)' }}
     >
       <div className="absolute top-8 left-0 right-0 text-center select-none pointer-events-none"
         style={{

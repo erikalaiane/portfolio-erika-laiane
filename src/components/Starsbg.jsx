@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 
-// ✦ estrela de 4 pontas
 function starPath(cx, cy, r1, r2) {
   const points = []
   for (let i = 0; i < 8; i++) {
@@ -11,7 +10,6 @@ function starPath(cx, cy, r1, r2) {
   return points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p[0]},${p[1]}`).join(' ') + ' Z'
 }
 
-// ⟡ losango fino
 function diamondPath(cx, cy, r1, r2) {
   return `M${cx},${cy - r1} L${cx + r2},${cy} L${cx},${cy + r1} L${cx - r2},${cy} Z`
 }
@@ -23,8 +21,9 @@ export default function StarsBg() {
     const svg = svgRef.current
     if (!svg) return
 
+    // ✅ Usa só a viewport — correto para position: fixed
     const W = window.innerWidth
-    const H = document.documentElement.scrollHeight || window.innerHeight * 3
+    const H = window.innerHeight
 
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`)
     svg.setAttribute('width', W)
@@ -79,7 +78,19 @@ export default function StarsBg() {
       svg.appendChild(c)
     }
 
+    // ✅ Recalcula se a janela for redimensionada
+    function handleResize() {
+      const newW = window.innerWidth
+      const newH = window.innerHeight
+      svg.setAttribute('viewBox', `0 0 ${newW} ${newH}`)
+      svg.setAttribute('width', newW)
+      svg.setAttribute('height', newH)
+    }
+
+    window.addEventListener('resize', handleResize)
+
     return () => {
+      window.removeEventListener('resize', handleResize)
       while (svg.firstChild) svg.removeChild(svg.firstChild)
     }
   }, [])
@@ -97,8 +108,6 @@ export default function StarsBg() {
         style={{
           position: 'fixed',
           inset: 0,
-          top: 0,
-          left: 0,
           zIndex: 0,
           pointerEvents: 'none',
         }}
