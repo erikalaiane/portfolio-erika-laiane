@@ -294,7 +294,7 @@ export default function Contact() {
                     fontSize: '10px', color: '#a78bfa',
                     letterSpacing: '0.3em', textTransform: 'uppercase',
                     marginBottom: '8px', fontWeight: 700,
-                  }}>disponível para trabalhar</div>
+                  }}>Ao código</div>
                   <h2 style={{
                     fontFamily: "'Abril Fatface', serif",
                     fontSize: 'clamp(26px, 3.5vw, 40px)',
@@ -313,7 +313,7 @@ export default function Contact() {
                         num: repoCount !== null ? `${repoCount}+` : '...',
                         label: 'repositórios',
                       },
-                      { num: '1+', label: 'ano dev' },
+                      { num: '3+', label: 'ano dev' },
                       { num: '∞',  label: 'criatividade' },
                     ].map((s) => (
                       <div key={s.label}>

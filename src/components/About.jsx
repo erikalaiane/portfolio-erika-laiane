@@ -76,6 +76,8 @@ const interests = [
   { icon: '📚', label: 'Leitura' },
   { icon: '🎬', label: 'Filmes' },
   { icon: '🎵', label: 'Música' },
+  { icon: '🎸', label: 'Guitarra' },
+  { icon: '🎞️', label: 'Edição de Vídeo' },
 ]
 
 function SectionLabel({ children }) {

@@ -272,7 +272,7 @@ export default function Projects() {
           >
             <SectionHeader
               number="03"
-              title="projetos"
+              title="principais projetos"
               counter={repoCount}
             />
           </motion.div>
