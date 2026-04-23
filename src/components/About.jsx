@@ -60,10 +60,10 @@ const education = [
 ]
 
 const facts = [
-  { label: 'Base',       value: 'Rio de Janeiro' },
-  { label: 'Foco',       value: 'Front-End + UI' },
-  { label: 'Status',     value: 'Open to work', highlight: true },
-  { label: 'Disponível', value: '20h · Remoto' },
+  { label: '📍 Localização',       value: 'Rio de Janeiro' },
+  { label: '🎯 Foco',       value: 'Front-End + UI' },
+  { label: '✦ Status',     value: 'Open to work', highlight: true },
+  { label: '⏱ Disponível', value: '40h · Remoto' },
 ]
 
 const interests = [
@@ -269,7 +269,7 @@ export default function About() {
               borderRadius: '4px',
               padding: '16px',
             }}>
-              <SectionLabel>✦ interesses</SectionLabel>
+              <SectionLabel>✦ interesses Pessoais</SectionLabel>
               <div className="grid grid-cols-2 gap-2">
                 {interests.map((item) => (
                   <div key={item.label} style={{
