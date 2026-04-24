@@ -3,19 +3,19 @@ import { motion } from 'framer-motion'
 import heroImg from '../assets/images/hero.jpg'
 
 const stacks = [
-  { name: 'React',      icon: '⚛',  bg: '#20232A' },
-  { name: 'Tailwind',   icon: '🌊', bg: '#0f172a' },
-  { name: 'Vite',       icon: '⚡', bg: '#1a1a2e' },
-  { name: 'JavaScript', icon: '🟨', bg: '#1a1505' },
-  { name: 'Figma',      icon: '🎨', bg: '#1a0a0a' },
-  { name: 'Node.js',    icon: '🟩', bg: '#0a1a0a' },
+  { name: 'React',      icon: 'https://cdn.simpleicons.org/react/61DAFB' },
+  { name: 'Tailwind',   icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4' },
+  { name: 'Vite',       icon: 'https://cdn.simpleicons.org/vite/646CFF' },
+  { name: 'JavaScript', icon: 'https://cdn.simpleicons.org/javascript/F7DF1E' },
+  { name: 'Figma',      icon: 'https://cdn.simpleicons.org/figma/F24E1E' },
+  { name: 'Node.js',    icon: 'https://cdn.simpleicons.org/nodedotjs/339933' },
 ]
 
 const infos = [
-  { label: 'FOCO',       value: 'Front-end Dev',    accent: '#8B5CF6' },
-  { label: 'DISPONÍVEL', value: 'Freelance & CLT',  accent: '#EC4899' },
-  { label: 'PROJETOS',   value: 'Kira Nox · Acelera', accent: '#8B5CF6' },
-  { label: 'EST.',       value: '2024 · crescendo', accent: '#EC4899' },
+  { label: 'FOCO',        value: 'Front-end Dev',    accent: '#8B5CF6' },
+  { label: 'DISPONÍVEL',  value: 'Freelance & CLT',  accent: '#EC4899' },
+  { label: 'EXPERIÊNCIA', value: '2024 — atual',     accent: '#8B5CF6' },
+  { label: 'STACK',       value: 'React · Tailwind', accent: '#EC4899' },
 ]
 
 export default function Hero() {
@@ -272,7 +272,7 @@ export default function Hero() {
               backdropFilter: 'blur(12px)',
             }}
           >
-            <p style={{ fontSize: '8px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '12px' }}>
+            <p style={{ fontSize: '8px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '12px' }}>
               Stack & Ferramentas
             </p>
             <div className="grid grid-cols-2 gap-2">
@@ -292,12 +292,11 @@ export default function Hero() {
                     e.currentTarget.style.transform = 'translateY(0)'
                   }}
                 >
-                  <div
-                    className="w-5 h-5 rounded flex items-center justify-center text-xs flex-shrink-0"
-                    style={{ background: s.bg }}
-                  >
-                    {s.icon}
-                  </div>
+                  <img
+  src={s.icon}
+  alt={s.name}
+  style={{ width: '18px', height: '18px', objectFit: 'contain', flexShrink: 0 }}
+/>
                   <span className="font-body text-white font-medium" style={{ fontSize: '11px' }}>
                     {s.name}
                   </span>
@@ -308,7 +307,7 @@ export default function Hero() {
 
           {/* INFO */}
           <div className="flex flex-col gap-2">
-            <p style={{ fontSize: '8px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.35em', textTransform: 'uppercase' }}>
+            <p style={{ fontSize: '8px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.35em', textTransform: 'uppercase' }}>
               Info
             </p>
             <div className="grid grid-cols-2 gap-2">

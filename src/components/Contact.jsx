@@ -4,6 +4,12 @@ import { motion } from 'framer-motion'
 import contactImg from '../assets/images/contact.jpg'
 import SectionHeader from '../components/SectionHeader'
 
+// ✅ Substitua pelo seu endpoint do Formspree
+// 1. Acesse formspree.io e crie uma conta gratuita
+// 2. Crie um novo Form com seu email
+// 3. Cole o endpoint aqui (ex: https://formspree.io/f/xyzabcde)
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/SEU_ID_AQUI'
+
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: (i = 0) => ({
@@ -19,15 +25,22 @@ const socialLinks = [
   { label: 'Email',     handle: 'erikalaianeazevedo...', url: 'mailto:erikalaianeazevedosantos@gmail.com',         icon: 'https://cdn.simpleicons.org/gmail/fb923c',     color: '#fb923c' },
 ]
 
+// Estados do formulário
+const STATUS = {
+  IDLE: 'idle',
+  SENDING: 'sending',
+  SUCCESS: 'success',
+  ERROR: 'error',
+}
+
 export default function Contact() {
-  const [sent, setSent] = useState(false)
+  const [status, setStatus] = useState(STATUS.IDLE)
   const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [repoCount, setRepoCount] = useState(null)
 
   useEffect(() => {
     const token = import.meta.env.VITE_GITHUB_TOKEN
     const headers = token ? { Authorization: `Bearer ${token}` } : {}
-
     fetch('https://api.github.com/users/erikalaiane', { headers })
       .then(r => r.ok ? r.json() : null)
       .then(data => { if (data) setRepoCount(data.public_repos) })
@@ -38,14 +51,41 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
-    const subject = encodeURIComponent(`Contato via portfólio — ${form.name}`)
-    const body = encodeURIComponent(`Nome: ${form.name}\nEmail: ${form.email}\n\n${form.message}`)
-    window.open(`mailto:erikalaianeazevedosantos@gmail.com?subject=${subject}&body=${body}`)
-    setSent(true)
-    setTimeout(() => setSent(false), 4000)
+    setStatus(STATUS.SENDING)
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+        }),
+      })
+
+      if (response.ok) {
+        setStatus(STATUS.SUCCESS)
+        setForm({ name: '', email: '', message: '' })
+        setTimeout(() => setStatus(STATUS.IDLE), 5000)
+      } else {
+        setStatus(STATUS.ERROR)
+        setTimeout(() => setStatus(STATUS.IDLE), 4000)
+      }
+    } catch {
+      setStatus(STATUS.ERROR)
+      setTimeout(() => setStatus(STATUS.IDLE), 4000)
+    }
   }
+
+  const isSending = status === STATUS.SENDING
+  const isSuccess = status === STATUS.SUCCESS
+  const isError   = status === STATUS.ERROR
 
   return (
     <section
@@ -69,7 +109,6 @@ export default function Contact() {
         style={{ background: 'rgba(244,114,182,0.05)' }} />
 
       <div className="max-w-6xl mx-auto relative z-10">
-
         <SectionHeader number="04" title="contato" />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -88,7 +127,8 @@ export default function Contact() {
               <h3 style={{
                 fontFamily: "'Abril Fatface', serif",
                 fontSize: 'clamp(32px, 5vw, 56px)',
-                color: '#ffffff', lineHeight: 1.05, marginBottom: '16px',
+                color: '#F5F3FF',  /* ✅ branco com tom roxo — mais suave que #fff puro */
+                lineHeight: 1.05, marginBottom: '16px',
               }}>
                 Vamos<br />
                 <span style={{ color: '#a78bfa' }}>conversar</span>
@@ -96,7 +136,9 @@ export default function Contact() {
               </h3>
               <p style={{
                 fontFamily: "'Inter', sans-serif",
-                fontSize: '15px', color: 'rgba(232,228,240,0.75)',
+                fontSize: '15px',
+                /* ✅ opacity 0.85 — muito mais legível que 0.75 */
+                color: 'rgba(232,228,240,0.85)',
                 lineHeight: '1.8', maxWidth: '420px',
               }}>
                 Freela, estágio, collab ou só uma ideia louca sobre design e código —
@@ -120,13 +162,17 @@ export default function Contact() {
                       type={field.type} name={field.name}
                       value={form[field.name]} onChange={handleChange}
                       placeholder={field.placeholder} required
+                      disabled={isSending}
                       style={{
                         background: 'rgba(255,255,255,0.04)',
                         border: '1px solid rgba(139,92,246,0.25)',
                         borderRadius: '6px', padding: '13px 16px',
-                        color: '#f0ecff', fontFamily: "'Inter', sans-serif",
+                        /* ✅ cor do texto do input mais forte */
+                        color: '#F0ECFF',
+                        fontFamily: "'Inter', sans-serif",
                         fontSize: '14px', outline: 'none',
                         transition: 'border-color 0.25s, background 0.25s',
+                        opacity: isSending ? 0.6 : 1,
                       }}
                       onFocus={e => {
                         e.target.style.borderColor = 'rgba(167,139,250,0.7)'
@@ -150,15 +196,17 @@ export default function Contact() {
                 <textarea
                   name="message" value={form.message} onChange={handleChange}
                   placeholder="Conta o que você tem em mente..."
-                  required rows={6}
+                  required rows={6} disabled={isSending}
                   style={{
                     background: 'rgba(255,255,255,0.04)',
                     border: '1px solid rgba(139,92,246,0.25)',
                     borderRadius: '6px', padding: '13px 16px',
-                    color: '#f0ecff', fontFamily: "'Inter', sans-serif",
+                    color: '#F0ECFF',
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: '14px', outline: 'none', resize: 'vertical',
                     transition: 'border-color 0.25s, background 0.25s',
                     lineHeight: '1.7',
+                    opacity: isSending ? 0.6 : 1,
                   }}
                   onFocus={e => {
                     e.target.style.borderColor = 'rgba(167,139,250,0.7)'
@@ -172,43 +220,71 @@ export default function Contact() {
               </div>
 
               <div className="flex items-center gap-4 flex-wrap">
-                <button type="submit" style={{
-                  fontFamily: "'Courier New', monospace",
-                  fontSize: '12px', fontWeight: 700, color: '#ffffff',
-                  letterSpacing: '0.2em', textTransform: 'uppercase',
-                  border: '1.5px solid #8B5CF6', padding: '15px 36px',
-                  cursor: 'pointer',
-                  background: sent ? 'rgba(74,222,128,0.15)' : 'rgba(139,92,246,0.15)',
-                  borderColor: sent ? '#4ade80' : '#8B5CF6',
-                  transition: 'all 0.3s', borderRadius: '4px',
-                }}
+                <button
+                  type="submit"
+                  disabled={isSending || isSuccess}
+                  style={{
+                    fontFamily: "'Courier New', monospace",
+                    fontSize: '12px', fontWeight: 700, color: '#ffffff',
+                    letterSpacing: '0.2em', textTransform: 'uppercase',
+                    border: '1.5px solid',
+                    borderColor: isSuccess ? '#4ade80' : isError ? '#f87171' : '#8B5CF6',
+                    padding: '15px 36px',
+                    cursor: isSending ? 'not-allowed' : 'pointer',
+                    background: isSuccess
+                      ? 'rgba(74,222,128,0.15)'
+                      : isError
+                        ? 'rgba(248,113,113,0.12)'
+                        : 'rgba(139,92,246,0.15)',
+                    transition: 'all 0.3s', borderRadius: '4px',
+                    opacity: isSending ? 0.7 : 1,
+                  }}
                   onMouseEnter={e => {
-                    if (!sent) {
+                    if (!isSending && !isSuccess) {
                       e.currentTarget.style.background = 'rgba(139,92,246,0.3)'
                       e.currentTarget.style.transform = 'translateY(-2px)'
                     }
                   }}
                   onMouseLeave={e => {
-                    if (!sent) {
+                    if (!isSending && !isSuccess) {
                       e.currentTarget.style.background = 'rgba(139,92,246,0.15)'
                       e.currentTarget.style.transform = 'translateY(0)'
                     }
                   }}
                 >
-                  {sent ? '✦ Enviado!' : 'Enviar mensagem →'}
+                  {isSending ? '✦ Enviando...' : isSuccess ? '✦ Enviado!' : isError ? 'Tentar novamente' : 'Enviar mensagem →'}
                 </button>
-                {sent && (
+
+                {isSuccess && (
                   <span style={{
                     fontFamily: "'Courier New', monospace",
                     fontSize: '12px', color: '#4ade80', fontWeight: 600,
                     letterSpacing: '0.1em', animation: 'fadeIn 0.3s ease',
-                  }}>Abrindo seu email... ✦</span>
+                  }}>
+                    Mensagem recebida! Respondo em breve ✦
+                  </span>
+                )}
+
+                {isError && (
+                  <span style={{
+                    fontFamily: "'Courier New', monospace",
+                    fontSize: '12px', color: '#f87171', fontWeight: 600,
+                    letterSpacing: '0.1em',
+                  }}>
+                    Algo deu errado. Tente novamente.
+                  </span>
                 )}
               </div>
+
+              {/* ✅ Nota atualizada — sem mais referência ao mailto */}
               <p style={{
                 fontFamily: "'Courier New', monospace",
-                fontSize: '10px', color: 'rgba(255,255,255,0.3)', letterSpacing: '0.1em',
-              }}>* Abrirá seu client de email com a mensagem preenchida.</p>
+                fontSize: '10px',
+                color: 'rgba(232,228,240,0.45)', /* ✅ mais legível que 0.3 */
+                letterSpacing: '0.1em',
+              }}>
+                * Sua mensagem chega direto no meu email via Formspree. Respondo em até 48h.
+              </p>
             </form>
 
             <div style={{ height: '1px', background: 'linear-gradient(to right, rgba(139,92,246,0.3), transparent)' }} />
@@ -233,7 +309,7 @@ export default function Contact() {
               </p>
               <span style={{
                 fontFamily: "'Courier New', monospace",
-                fontSize: '10px', color: 'rgba(255,255,255,0.4)',
+                fontSize: '10px', color: 'rgba(232,228,240,0.5)', /* ✅ */
                 letterSpacing: '0.2em', display: 'block', marginTop: '10px', fontWeight: 600,
               }}>— ÉRIKA LAIANE · RJ, 2025</span>
             </div>
@@ -256,8 +332,6 @@ export default function Contact() {
                 <div className="absolute inset-0" style={{
                   background: 'linear-gradient(to top, rgba(5,2,20,0.95) 0%, rgba(5,2,20,0.4) 45%, rgba(5,2,20,0.1) 100%)'
                 }} />
-                <div className="absolute left-5 top-16 bottom-32 w-px"
-                  style={{ background: 'linear-gradient(to bottom, transparent, rgba(167,139,250,0.4), transparent)' }} />
 
                 <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-2"
                   style={{
@@ -298,7 +372,8 @@ export default function Contact() {
                   <h2 style={{
                     fontFamily: "'Abril Fatface', serif",
                     fontSize: 'clamp(26px, 3.5vw, 40px)',
-                    color: '#ffffff', lineHeight: 1.05,
+                    color: '#F5F3FF', /* ✅ */
+                    lineHeight: 1.05,
                     textShadow: '0 2px 20px rgba(0,0,0,0.8)',
                   }}>
                     Vamos criar<br />
@@ -306,13 +381,9 @@ export default function Contact() {
                     <span style={{ color: '#f472b6' }}>?</span>
                   </h2>
 
-                  {/* ✅ Stats com repoCount dinâmico */}
                   <div className="flex gap-5 mt-4">
                     {[
-                      {
-                        num: repoCount !== null ? `${repoCount}+` : '...',
-                        label: 'repositórios',
-                      },
+                      { num: repoCount !== null ? `${repoCount}+` : '...', label: 'repositórios' },
                       { num: '3+', label: 'ano dev' },
                       { num: '∞',  label: 'criatividade' },
                     ].map((s) => (
@@ -325,7 +396,7 @@ export default function Contact() {
                         }}>{s.num}</div>
                         <div style={{
                           fontFamily: "'Courier New', monospace",
-                          fontSize: '9px', color: 'rgba(167,139,250,0.7)',
+                          fontSize: '9px', color: 'rgba(196,181,253,0.8)', /* ✅ mais legível */
                           letterSpacing: '0.15em', textTransform: 'uppercase',
                         }}>{s.label}</div>
                       </div>
@@ -362,11 +433,8 @@ export default function Contact() {
                 >
                   <div className="flex items-center gap-2 mb-2">
                     {link.svg ? link.svg : (
-                      <img
-                        src={link.icon}
-                        alt={link.label}
-                        style={{ width: '13px', height: '13px', objectFit: 'contain' }}
-                      />
+                      <img src={link.icon} alt={link.label}
+                        style={{ width: '13px', height: '13px', objectFit: 'contain' }} />
                     )}
                     <span style={{
                       fontFamily: "'Courier New', monospace",
@@ -376,7 +444,7 @@ export default function Contact() {
                   </div>
                   <div style={{
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: '12px', color: '#f0ecff',
+                    fontSize: '12px', color: '#F0ECFF', /* ✅ */
                     fontWeight: 600, lineHeight: 1.3,
                   }}>{link.handle}</div>
                 </a>
@@ -393,7 +461,10 @@ export default function Contact() {
           to   { opacity: 1; transform: translateX(0); }
         }
         input::placeholder, textarea::placeholder {
-          color: rgba(232,228,240,0.2); font-style: italic;
+          color: rgba(232,228,240,0.3); font-style: italic;
+        }
+        input:disabled, textarea:disabled {
+          cursor: not-allowed;
         }
       `}</style>
     </section>

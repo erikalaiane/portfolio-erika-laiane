@@ -84,7 +84,8 @@ function SectionLabel({ children }) {
   return (
     <div style={{
       fontFamily: "'Courier New', monospace",
-      fontSize: '10px', color: 'rgba(167,139,250,0.6)',
+      fontSize: '11px', color: '#a78bfa',
+      fontWeight: 700,
       letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '14px'
     }}>{children}</div>
   )
