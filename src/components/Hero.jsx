@@ -99,19 +99,16 @@ export default function Hero() {
               ERIKA<br />LAIANE
             </h1>
 
-            {/* Subtítulo gradiente */}
-            <p
-              className="font-display"
-              style={{
-                fontSize: '16px',
-                letterSpacing: '2px',
-                background: 'linear-gradient(90deg, #8B5CF6, #EC4899)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-              }}
-            >
-              WHERE CODE MEETS DESIGN.
-            </p>
+            {/* Subtítulo gradiente animado */}
+              <p
+                className="font-display animated-gradient-text"
+                style={{
+                  fontSize: '16px',
+                  letterSpacing: '2px',
+                }}
+              >
+                WHERE CODE MEETS DESIGN.
+              </p>
 
             {/* Descrição */}
             <p
@@ -389,6 +386,23 @@ export default function Hero() {
         </motion.div>
 
       </div>
+      
+      <style>{`
+        .animated-gradient-text {
+          background: linear-gradient(90deg, #8B5CF6, #EC4899, #8B5CF6);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: gradientShift 3s linear infinite;
+        }
+
+        @keyframes gradientShift {
+          0%   { background-position: 0% center; }
+          100% { background-position: 200% center; }
+        }
+      `}</style>
+
     </section>
   )
 }
