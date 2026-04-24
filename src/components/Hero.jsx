@@ -2,6 +2,24 @@
 import { motion } from 'framer-motion'
 import heroImg from '../assets/images/hero.jpg'
 
+const containerVariants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
 const stacks = [
   { name: 'React',      icon: 'https://cdn.simpleicons.org/react/61DAFB' },
   { name: 'Tailwind',   icon: 'https://cdn.simpleicons.org/tailwindcss/06B6D4' },
@@ -20,8 +38,8 @@ const infos = [
 
 export default function Hero() {
   return (
-  <section className="flex flex-col justify-center px-6 pb-5 pt-24 relative z-10">  
-  <div className="max-w-6xl mx-auto w-full flex flex-col gap-3">
+    <section className="flex flex-col justify-center px-6 pb-5 pt-24 relative z-10">
+      <div className="max-w-6xl mx-auto w-full flex flex-col gap-3">
 
         {/* ── BANNER PRINCIPAL ── */}
         <motion.div
@@ -45,12 +63,11 @@ export default function Hero() {
           <div
             className="absolute inset-0"
             style={{
-              background:
-                'linear-gradient(to right, rgba(17,24,39,0.97) 36%, rgba(17,24,39,0.25) 100%)',
+              background: 'linear-gradient(to right, rgba(17,24,39,0.97) 36%, rgba(17,24,39,0.25) 100%)',
             }}
           />
 
-          {/* Tagline vertical — centro da imagem */}
+          {/* Tagline vertical */}
           <div
             className="absolute top-1/2 -translate-y-1/2 pointer-events-none select-none"
             style={{
@@ -73,13 +90,16 @@ export default function Hero() {
             <span style={{ fontSize: '14px', color: '#ffffff', filter: 'drop-shadow(0 0 6px #fff)' }}>⟡</span>
           </div>
 
-          {/* Conteúdo esquerdo */}
-          <div
+          {/* ── CONTEÚDO ESQUERDO com stagger ── */}
+          <motion.div
             className="absolute inset-0 flex flex-col justify-center gap-3.5 pl-14"
             style={{ maxWidth: '52%' }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
           >
-            {/* Credential */}
-            <div className="flex flex-col gap-1">
+            {/* 1. Credential */}
+            <motion.div variants={itemVariants} className="flex flex-col gap-1">
               <span style={{ fontSize: '10.5px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(139,92,246,0.95)' }}>
                 Credential —
               </span>
@@ -89,37 +109,40 @@ export default function Hero() {
               <span style={{ fontSize: '8.5px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.25)' }}>
                 Creative Dev
               </span>
-            </div>
+            </motion.div>
 
-            {/* Título */}
-            <h1
-              className="font-display text-white leading-none"
-              style={{ fontSize: 'clamp(52px, 6.5vw, 76px)', letterSpacing: '1px' }}
-            >
-              ERIKA<br />LAIANE
-            </h1>
+            {/* 2. Título */}
+            <motion.div variants={itemVariants}>
+              <h1
+                className="font-display text-white leading-none"
+                style={{ fontSize: 'clamp(52px, 6.5vw, 76px)', letterSpacing: '1px' }}
+              >
+                ERIKA<br />LAIANE
+              </h1>
+            </motion.div>
 
-            {/* Subtítulo gradiente animado */}
+            {/* 3. Subtítulo gradiente animado */}
+            <motion.div variants={itemVariants}>
               <p
                 className="font-display animated-gradient-text"
-                style={{
-                  fontSize: '16px',
-                  letterSpacing: '2px',
-                }}
+                style={{ fontSize: '16px', letterSpacing: '2px' }}
               >
                 WHERE CODE MEETS DESIGN.
               </p>
+            </motion.div>
 
-            {/* Descrição */}
-            <p
-              className="font-body leading-relaxed"
-              style={{ fontSize: '12px', color: 'rgba(255,255,255,0.58)', maxWidth: '250px' }}
-            >
-              Desenvolvo interfaces que as pessoas sentem — não só veem.
-            </p>
+            {/* 4. Descrição */}
+            <motion.div variants={itemVariants}>
+              <p
+                className="font-body leading-relaxed"
+                style={{ fontSize: '12px', color: 'rgba(255,255,255,0.58)', maxWidth: '250px' }}
+              >
+                Desenvolvo interfaces que as pessoas sentem — não só veem.
+              </p>
+            </motion.div>
 
-            {/* Botões com efeito slide */}
-            <div className="flex gap-3 mt-1">
+            {/* 5. Botões */}
+            <motion.div variants={itemVariants} className="flex gap-3 mt-1">
               <a
                 href="#projetos"
                 className="relative group overflow-hidden font-body uppercase"
@@ -133,9 +156,7 @@ export default function Hero() {
                   display: 'inline-block',
                 }}
               >
-                <span
-                  className="absolute inset-0 bg-purple-main translate-y-full group-hover:translate-y-0 transition-transform duration-300"
-                />
+                <span className="absolute inset-0 bg-purple-main translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
                 <span className="relative">ver projetos</span>
               </a>
               <a
@@ -161,23 +182,26 @@ export default function Hero() {
               >
                 contato →
               </a>
-            </div>
+            </motion.div>
 
-            {/* Scroll hint */}
-            <div className="flex items-center gap-3 mt-1">
+            {/* 6. Scroll hint */}
+            <motion.div variants={itemVariants} className="flex items-center gap-3 mt-1">
               <div className="w-7 h-px bg-purple-main" />
               <span style={{ fontSize: '8px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)' }}>
                 scroll to explore
               </span>
               <span style={{ color: '#8B5CF6', fontSize: '11px' }}>↓</span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* ── Cards flutuantes (direita) ── */}
           <div className="absolute bottom-4 right-4 flex flex-col gap-2 items-end">
 
             {/* Status pill */}
             <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
               whileHover={{ y: -2, boxShadow: '0 4px 20px rgba(236,72,153,0.2)' }}
               className="flex items-center gap-2 px-4 py-2 rounded-full cursor-pointer"
               style={{
@@ -210,6 +234,9 @@ export default function Hero() {
 
             {/* Featured card */}
             <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 1.0 }}
               whileHover={{ y: -2, boxShadow: '0 4px 24px rgba(139,92,246,0.2)' }}
               className="flex gap-3 items-center p-3 rounded-xl cursor-pointer"
               style={{
@@ -256,7 +283,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
           className="grid gap-3"
           style={{ gridTemplateColumns: '1fr 1fr' }}
         >
@@ -290,10 +317,10 @@ export default function Hero() {
                   }}
                 >
                   <img
-  src={s.icon}
-  alt={s.name}
-  style={{ width: '18px', height: '18px', objectFit: 'contain', flexShrink: 0 }}
-/>
+                    src={s.icon}
+                    alt={s.name}
+                    style={{ width: '18px', height: '18px', objectFit: 'contain', flexShrink: 0 }}
+                  />
                   <span className="font-body text-white font-medium" style={{ fontSize: '11px' }}>
                     {s.name}
                   </span>
@@ -335,7 +362,6 @@ export default function Hero() {
                   <p className="font-body text-white font-medium" style={{ fontSize: '11px' }}>
                     {info.value}
                   </p>
-                  {/* Linha deslizante */}
                   <div
                     className="absolute bottom-0 left-0 right-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300"
                     style={{ height: '1px', background: 'linear-gradient(90deg, #8B5CF6, #EC4899)' }}
@@ -386,7 +412,7 @@ export default function Hero() {
         </motion.div>
 
       </div>
-      
+
       <style>{`
         .animated-gradient-text {
           background: linear-gradient(90deg, #8B5CF6, #EC4899, #8B5CF6);
@@ -396,10 +422,13 @@ export default function Hero() {
           background-clip: text;
           animation: gradientShift 3s linear infinite;
         }
-
         @keyframes gradientShift {
           0%   { background-position: 0% center; }
           100% { background-position: 200% center; }
+        }
+        @keyframes pulse {
+          0%, 100% { box-shadow: 0 0 6px rgba(236,72,153,0.8); }
+          50%       { box-shadow: 0 0 12px rgba(236,72,153,1); }
         }
       `}</style>
 
