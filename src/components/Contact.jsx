@@ -8,7 +8,7 @@ import SectionHeader from '../components/SectionHeader'
 // 1. Acesse formspree.io e crie uma conta gratuita
 // 2. Crie um novo Form com seu email
 // 3. Cole o endpoint aqui (ex: https://formspree.io/f/xyzabcde)
-const FORMSPREE_ENDPOINT = 'https://formspree.io/f/SEU_ID_AQUI'
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mlgazoqn'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
