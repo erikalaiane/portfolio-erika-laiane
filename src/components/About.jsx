@@ -122,56 +122,60 @@ export default function About() {
 
           {/* ── COLUNA ESQUERDA ── */}
           <motion.div
-            className="lg:col-span-4 flex flex-col gap-5"
+            className="lg:col-span-4 flex flex-col gap-5 w-full max-w-[520px] mx-auto lg:max-w-none lg:mx-0"
             variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}
           >
-            {/* Imagem com moldura */}
-            <div className="relative">
-              <div
-                className="absolute -top-3 -left-3 w-full h-full pointer-events-none"
-                style={{ border: '1px solid rgba(139,92,246,0.2)', borderRadius: '4px' }}
-              />
-              <div className="relative overflow-hidden" style={{ borderRadius: '4px', aspectRatio: '3/4' }}>
-                <img
-                  src={aboutImg}
-                  alt="Érika Laiane"
-                  className="w-full h-full object-cover"
-                  style={{ filter: 'contrast(1.05) brightness(0.88)' }}
-                />
-                <div
-                  className="absolute inset-0"
-                  style={{ background: 'linear-gradient(to top, rgba(10,5,30,0.75) 0%, transparent 55%)' }}
-                />
-                <div
-                  className="absolute bottom-4 left-4 right-4"
-                  style={{
-                    background: 'rgba(139,92,246,0.15)',
-                    backdropFilter: 'blur(12px)',
-                    border: '0.5px solid rgba(139,92,246,0.35)',
-                    borderRadius: '4px',
-                    padding: '10px 14px',
-                  }}
-                >
-                  <div className="flex items-center gap-2">
-                    <span style={{
-                      width: '7px', height: '7px', borderRadius: '50%',
-                      background: '#4ade80', boxShadow: '0 0 8px #4ade80',
-                      display: 'inline-block', animation: 'blink 2s ease-in-out infinite',
-                    }} />
-                    <span style={{
-                      fontFamily: "'Courier New', monospace",
-                      fontSize: '10px', color: 'rgba(255,255,255,0.9)',
-                      letterSpacing: '0.2em', textTransform: 'uppercase'
-                    }}>Open to work</span>
-                  </div>
-                  <div style={{
-                    fontFamily: "'Courier New', monospace",
-                    fontSize: '9px', color: 'rgba(255,255,255,0.5)',
-                    letterSpacing: '0.1em', marginTop: '4px'
-                  }}>📍 Rio de Janeiro · Remoto</div>
-                </div>
-              </div>
+        {/* Imagem com moldura */}
+        <div className="relative">
+          <div
+            className="absolute -top-3 -left-3 w-full h-full pointer-events-none"
+            style={{ border: '1px solid rgba(139,92,246,0.2)', borderRadius: '4px' }}
+          />
+          <div className="relative overflow-hidden" style={{
+            borderRadius: '4px',
+            aspectRatio: '3/4',
+            
+          }}>
+          <img
+            src={aboutImg}
+            alt="Érika Laiane"
+            className="w-full h-full object-cover"
+            style={{ filter: 'contrast(1.05) brightness(0.88)' }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to top, rgba(10,5,30,0.75) 0%, transparent 55%)' }}
+          />
+          <div
+            className="absolute bottom-4 left-4 right-4"
+            style={{
+              background: 'rgba(139,92,246,0.15)',
+              backdropFilter: 'blur(12px)',
+              border: '0.5px solid rgba(139,92,246,0.35)',
+              borderRadius: '4px',
+              padding: '10px 14px',
+            }}
+          >
+            <div className="flex items-center gap-2">
+              <span style={{
+                width: '7px', height: '7px', borderRadius: '50%',
+                background: '#4ade80', boxShadow: '0 0 8px #4ade80',
+                display: 'inline-block', animation: 'blink 2s ease-in-out infinite',
+              }} />
+              <span style={{
+                fontFamily: "'Courier New', monospace",
+                fontSize: '10px', color: 'rgba(255,255,255,0.9)',
+                letterSpacing: '0.2em', textTransform: 'uppercase'
+              }}>Open to work</span>
             </div>
+            <div style={{
+              fontFamily: "'Courier New', monospace",
+              fontSize: '9px', color: 'rgba(255,255,255,0.5)',
+              letterSpacing: '0.1em', marginTop: '4px'
+            }}>📍 Rio de Janeiro · Remoto</div>
+          </div>
+        </div>
+      </div>
 
             {/* Tags soft skills */}
             <div className="flex flex-wrap gap-2">
@@ -286,8 +290,7 @@ export default function About() {
           </motion.div>
 
           {/* ── COLUNA DIREITA ── */}
-          <div className="lg:col-span-8 flex flex-col gap-8">
-
+          <div className="lg:col-span-8 flex flex-col gap-8">   
             {/* Nome + bio */}
             <motion.div variants={fadeUp} custom={2} initial="hidden" whileInView="visible" viewport={{ once: true }}>
               <h2 style={{

@@ -30,10 +30,7 @@ function getLangColor(lang) {
 
 function SectionLabel({ children }) {
   return (
-    <div style={{
-      display: 'flex', alignItems: 'center', gap: '12px',
-      marginBottom: '14px',
-    }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '14px' }}>
       <div style={{ width: '32px', height: '1px', background: '#8B5CF6' }} />
       <span style={{
         fontFamily: "'Courier New', monospace",
@@ -70,30 +67,20 @@ function OrbitalActivity({ contributions, repoCount, languages }) {
 
   return (
     <div style={{
-      padding: '28px',
+      padding: '20px',
       background: 'rgba(139,92,246,0.04)',
       border: '0.5px solid rgba(139,92,246,0.15)',
       borderRadius: '8px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '24px',
-      height: '100%',
-      boxSizing: 'border-box',
+      display: 'flex', flexDirection: 'column', gap: '20px',
+      height: '100%', boxSizing: 'border-box',
     }}>
 
-      <div style={{ display: 'flex', justifyContent: 'center', position: 'relative' }}>
-        <div style={{
-          position: 'absolute',
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: '72px',
-          color: 'rgba(139,92,246,0.04)',
-          letterSpacing: '0.05em',
-          bottom: '-10px', left: '-4px',
-          pointerEvents: 'none', lineHeight: 1,
-          userSelect: 'none',
-        }}>GH</div>
-
-        <svg width="220" height="220" viewBox="-110 -110 220 220" style={{ overflow: 'visible' }}>
+      {/* SVG orbital — responsivo com viewBox */}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <svg
+          viewBox="-110 -110 220 220"
+          style={{ overflow: 'visible', width: '100%', maxWidth: '200px', height: 'auto' }}
+        >
           {[45, 70, 95].map(r => (
             <circle key={r} cx="0" cy="0" r={r}
               fill="none" stroke="rgba(139,92,246,0.18)" strokeWidth="0.5"
@@ -107,13 +94,11 @@ function OrbitalActivity({ contributions, repoCount, languages }) {
               />
             )
           })}
-          <text x="38" y="-88"
-            fontFamily="'Courier New', monospace"
+          <text x="38" y="-88" fontFamily="'Courier New', monospace"
             fontSize="8" fill="rgba(255,255,255,0.3)" letterSpacing="0.15em">
             {contributions ?? '—'} commits
           </text>
-          <text x="-95" y="30"
-            fontFamily="'Courier New', monospace"
+          <text x="-95" y="30" fontFamily="'Courier New', monospace"
             fontSize="8" fill="rgba(255,255,255,0.25)" letterSpacing="0.15em">
             último ano
           </text>
@@ -121,18 +106,19 @@ function OrbitalActivity({ contributions, repoCount, languages }) {
             fill="rgba(139,92,246,0.15)" stroke="rgba(167,139,250,0.5)" strokeWidth="0.5"
           />
           <text x="0" y="5" textAnchor="middle"
-            fontFamily="'Courier New', monospace"
-            fontSize="13" fill="rgba(167,139,250,0.8)">
+            fontFamily="'Courier New', monospace" fontSize="13" fill="rgba(167,139,250,0.8)">
             ⌥
           </text>
         </svg>
       </div>
 
-      <div style={{ display: 'flex', gap: '32px' }}>
+      {/* Stats — tamanho responsivo com clamp */}
+      <div style={{ display: 'flex', gap: '24px' }}>
         <div>
           <div style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: '64px', color: '#a78bfa', lineHeight: 1,
+            fontSize: 'clamp(36px, 8vw, 64px)',
+            color: '#a78bfa', lineHeight: 1,
             filter: 'drop-shadow(0 0 16px rgba(167,139,250,0.5))',
           }}>{contributions ?? '—'}</div>
           <div style={{
@@ -145,7 +131,8 @@ function OrbitalActivity({ contributions, repoCount, languages }) {
         <div>
           <div style={{
             fontFamily: "'Bebas Neue', sans-serif",
-            fontSize: '64px', color: '#EC4899', lineHeight: 1,
+            fontSize: 'clamp(36px, 8vw, 64px)',
+            color: '#EC4899', lineHeight: 1,
             filter: 'drop-shadow(0 0 16px rgba(236,72,153,0.5))',
           }}>{repoCount ?? '—'}</div>
           <div style={{
@@ -163,14 +150,12 @@ function OrbitalActivity({ contributions, repoCount, languages }) {
             fontFamily: "'Courier New', monospace",
             fontSize: '10px', fontWeight: 600,
             color: 'rgba(167,139,250,0.6)',
-            letterSpacing: '0.3em', textTransform: 'uppercase',
-            marginBottom: '10px',
+            letterSpacing: '0.3em', textTransform: 'uppercase', marginBottom: '10px',
           }}>Stack · Linguagens</div>
 
           <div style={{
             height: '4px', borderRadius: '2px',
-            display: 'flex', overflow: 'hidden', gap: '2px',
-            marginBottom: '12px',
+            display: 'flex', overflow: 'hidden', gap: '2px', marginBottom: '12px',
           }}>
             {topLangs.map(([lang, bytes]) => (
               <div key={lang} style={{
@@ -180,14 +165,10 @@ function OrbitalActivity({ contributions, repoCount, languages }) {
                 borderRadius: '2px', flexShrink: 0,
               }} />
             ))}
-            <div style={{
-              flex: 1, height: '100%',
-              background: langColors.default,
-              borderRadius: '2px', opacity: 0.4,
-            }} />
+            <div style={{ flex: 1, height: '100%', background: langColors.default, borderRadius: '2px', opacity: 0.4 }} />
           </div>
 
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 18px' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px 12px' }}>
             {topLangs.map(([lang]) => (
               <div key={lang} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <div style={{
@@ -197,31 +178,13 @@ function OrbitalActivity({ contributions, repoCount, languages }) {
                 }} />
                 <span style={{
                   fontFamily: "'Courier New', monospace",
-                  fontSize: '9px', fontWeight: 500,
-                  color: '#a78bfa',
+                  fontSize: '9px', fontWeight: 500, color: '#a78bfa',
                   border: '0.5px solid rgba(139,92,246,0.3)',
-                  padding: '3px 8px',
-                  letterSpacing: '0.1em', textTransform: 'uppercase',
-                  borderRadius: '4px',
-                  background: 'rgba(139,92,246,0.06)',
+                  padding: '3px 8px', letterSpacing: '0.1em', textTransform: 'uppercase',
+                  borderRadius: '4px', background: 'rgba(139,92,246,0.06)',
                 }}>{lang}</span>
               </div>
             ))}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <div style={{
-                width: '8px', height: '8px', borderRadius: '50%',
-                background: langColors.default, flexShrink: 0, opacity: 0.4,
-              }} />
-              <span style={{
-                fontFamily: "'Courier New', monospace",
-                fontSize: '9px', fontWeight: 500,
-                color: 'rgba(167,139,250,0.4)',
-                border: '0.5px solid rgba(139,92,246,0.15)',
-                padding: '3px 8px',
-                letterSpacing: '0.1em', textTransform: 'uppercase',
-                borderRadius: '4px',
-              }}>outros</span>
-            </div>
           </div>
         </div>
       )}
@@ -234,8 +197,7 @@ function ReadmeSnippet() {
     <div style={{
       background: 'rgba(0,0,0,0.25)',
       border: '0.5px solid rgba(139,92,246,0.2)',
-      borderRadius: '6px',
-      overflow: 'hidden',
+      borderRadius: '6px', overflow: 'hidden',
     }}>
       <div style={{
         display: 'flex', alignItems: 'center', gap: '6px',
@@ -244,24 +206,21 @@ function ReadmeSnippet() {
         background: 'rgba(139,92,246,0.06)',
       }}>
         {['#EC4899', '#a78bfa', '#89e051'].map((c, i) => (
-          <div key={i} style={{
-            width: '8px', height: '8px', borderRadius: '50%',
-            background: c, opacity: 0.7,
-          }} />
+          <div key={i} style={{ width: '8px', height: '8px', borderRadius: '50%', background: c, opacity: 0.7 }} />
         ))}
         <span style={{
           fontFamily: "'Courier New', monospace",
           fontSize: '9px', fontWeight: 600,
           color: 'rgba(167,139,250,0.5)',
-          letterSpacing: '0.2em', marginLeft: '6px',
-          textTransform: 'uppercase',
+          letterSpacing: '0.2em', marginLeft: '6px', textTransform: 'uppercase',
         }}>readme.md</span>
       </div>
 
+      {/* overflowX: auto evita transbordo no mobile */}
       <pre style={{
-        margin: 0, padding: '16px',
+        margin: 0, padding: '14px',
         fontFamily: "'Courier New', monospace",
-        fontSize: '11px', lineHeight: '1.9',
+        fontSize: '10px', lineHeight: '1.9',
         color: 'rgba(232,228,240,0.6)',
         overflowX: 'auto', whiteSpace: 'pre',
       }}>
@@ -307,17 +266,14 @@ function ReadmeSnippet() {
 function RepoCard({ repo, delay }) {
   return (
     <motion.a
-      href={repo.html_url}
-      target="_blank"
-      rel="noreferrer"
+      href={repo.html_url} target="_blank" rel="noreferrer"
       variants={fadeUp} custom={delay} initial="hidden" whileInView="visible" viewport={{ once: true }}
       style={{
         display: 'flex', flexDirection: 'column', gap: '10px',
         padding: '18px',
         background: 'rgba(139,92,246,0.04)',
         border: '0.5px solid rgba(139,92,246,0.15)',
-        borderRadius: '8px',
-        textDecoration: 'none',
+        borderRadius: '8px', textDecoration: 'none',
         transition: 'border-color 0.25s, background 0.25s, transform 0.25s',
         cursor: 'pointer',
       }}
@@ -333,20 +289,16 @@ function RepoCard({ repo, delay }) {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-        <span style={{
-          fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: '20px', color: '#f8f4ff',
-          letterSpacing: '0.05em', lineHeight: 1,
-        }}>{repo.name}</span>
+        <span style={{ fontFamily: "'Bebas Neue', sans-serif", fontSize: '20px', color: '#f8f4ff', letterSpacing: '0.05em', lineHeight: 1 }}>
+          {repo.name}
+        </span>
         <span style={{ color: '#8B5CF6', fontSize: '18px' }}>→</span>
       </div>
 
       <p style={{
-        fontFamily: "'Inter', sans-serif",
-        fontSize: '12px', color: 'rgba(232,228,240,0.65)',
-        lineHeight: '1.7', flex: 1,
-        display: '-webkit-box', WebkitLineClamp: 2,
-        WebkitBoxOrient: 'vertical', overflow: 'hidden',
+        fontFamily: "'Inter', sans-serif", fontSize: '12px',
+        color: 'rgba(232,228,240,0.65)', lineHeight: '1.7', flex: 1,
+        display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
       }}>
         {repo.description || 'Sem descrição'}
       </p>
@@ -356,25 +308,17 @@ function RepoCard({ repo, delay }) {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         {repo.language && (
           <span style={{
-            fontFamily: "'Courier New', monospace",
-            fontSize: '9px', fontWeight: 500,
-            color: '#a78bfa',
-            border: '0.5px solid rgba(139,92,246,0.3)',
-            padding: '3px 8px',
-            letterSpacing: '0.1em', textTransform: 'uppercase',
-            borderRadius: '4px',
-            background: 'rgba(139,92,246,0.06)',
-          }}>
-            {repo.language}
-          </span>
+            fontFamily: "'Courier New', monospace", fontSize: '9px', fontWeight: 500,
+            color: '#a78bfa', border: '0.5px solid rgba(139,92,246,0.3)',
+            padding: '3px 8px', letterSpacing: '0.1em', textTransform: 'uppercase',
+            borderRadius: '4px', background: 'rgba(139,92,246,0.06)',
+          }}>{repo.language}</span>
         )}
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
           <span style={{ color: '#a78bfa', fontSize: '11px' }}>✦</span>
-          <span style={{
-            fontFamily: "'Courier New', monospace",
-            fontSize: '10px', fontWeight: 500,
-            color: 'rgba(255,255,255,0.4)',
-          }}>{repo.stargazers_count}</span>
+          <span style={{ fontFamily: "'Courier New', monospace", fontSize: '10px', fontWeight: 500, color: 'rgba(255,255,255,0.4)' }}>
+            {repo.stargazers_count}
+          </span>
         </div>
       </div>
     </motion.a>
@@ -390,75 +334,51 @@ export default function GitHubStats() {
 
   useEffect(() => {
     async function fetchAll() {
-  // ✅ Lê o token do .env
-  const token = import.meta.env.VITE_GITHUB_TOKEN
-  const headers = token ? { Authorization: `Bearer ${token}` } : {}
+      const token = import.meta.env.VITE_GITHUB_TOKEN
+      const headers = token ? { Authorization: `Bearer ${token}` } : {}
 
-  try {
-    const profileRes = await fetch(
-      `https://api.github.com/users/${USERNAME}`,
-      { headers }
-    )
-    if (!profileRes.ok) {
-      console.warn('GitHub API indisponível:', profileRes.status)
-      setLoading(false)
-      return
-    }
-    const profileData = await profileRes.json()
-    setProfile(profileData)
+      try {
+        const profileRes = await fetch(`https://api.github.com/users/${USERNAME}`, { headers })
+        if (!profileRes.ok) { console.warn('GitHub API indisponível:', profileRes.status); setLoading(false); return }
+        const profileData = await profileRes.json()
+        setProfile(profileData)
 
-    const reposRes = await fetch(
-      `https://api.github.com/users/${USERNAME}/repos?sort=pushed&per_page=30`,
-      { headers }
-    )
-    if (!reposRes.ok) { setLoading(false); return }
+        const reposRes = await fetch(`https://api.github.com/users/${USERNAME}/repos?sort=pushed&per_page=30`, { headers })
+        if (!reposRes.ok) { setLoading(false); return }
+        const reposData = await reposRes.json()
+        if (!Array.isArray(reposData)) { setLoading(false); return }
 
-    const reposData = await reposRes.json()
-    if (!Array.isArray(reposData)) { setLoading(false); return }
+        const ownRepos = reposData.filter(r => !r.fork)
+        setRepos(ownRepos.slice(0, 6))
 
-    const ownRepos = reposData.filter(r => !r.fork)
-    setRepos(ownRepos.slice(0, 6))
-
-    try {
-      const langTotals = {}
-      await Promise.all(
-        ownRepos.slice(0, 15).map(async repo => {
-          const res = await fetch(
-            `https://api.github.com/repos/${USERNAME}/${repo.name}/languages`,
-            { headers }  // ✅ header em todas as chamadas
+        try {
+          const langTotals = {}
+          await Promise.all(
+            ownRepos.slice(0, 15).map(async repo => {
+              const res = await fetch(`https://api.github.com/repos/${USERNAME}/${repo.name}/languages`, { headers })
+              if (!res.ok) return
+              const data = await res.json()
+              Object.entries(data).forEach(([lang, bytes]) => {
+                langTotals[lang] = (langTotals[lang] || 0) + bytes
+              })
+            })
           )
-          if (!res.ok) return
-          const data = await res.json()
-          Object.entries(data).forEach(([lang, bytes]) => {
-            langTotals[lang] = (langTotals[lang] || 0) + bytes
-          })
-        })
-      )
-      setLanguages(langTotals)
-    } catch (e) {
-      console.warn('Languages API indisponível:', e)
-    }
+          setLanguages(langTotals)
+        } catch (e) { console.warn('Languages API indisponível:', e) }
 
-    try {
-      const contribRes = await fetch(
-        `https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`
-      )
-      const contribData = await contribRes.json()
-      const total =
-        contribData.total?.lastYear ??
-        contribData.total?.[new Date().getFullYear()] ??
-        null
-      if (total !== null) setContributions(total)
-    } catch (e) {
-      console.warn('Contributions API indisponível:', e)
-    }
+        try {
+          const contribRes = await fetch(`https://github-contributions-api.jogruber.de/v4/${USERNAME}?y=last`)
+          const contribData = await contribRes.json()
+          const total = contribData.total?.lastYear ?? contribData.total?.[new Date().getFullYear()] ?? null
+          if (total !== null) setContributions(total)
+        } catch (e) { console.warn('Contributions API indisponível:', e) }
 
-  } catch (err) {
-    console.error('GitHub API error:', err)
-  } finally {
-    setLoading(false)
-  }
-}
+      } catch (err) {
+        console.error('GitHub API error:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
 
     fetchAll()
   }, [])
@@ -466,18 +386,16 @@ export default function GitHubStats() {
   return (
     <section
       id="github"
-      className="relative pt-5 pb-9 px-6 overflow-hidden"
+      className="relative pt-5 pb-9 px-4 md:px-6 overflow-hidden"
       style={{ background: 'rgba(17,24,39,0.82)' }}
     >
-      <div
-        className="absolute top-8 left-0 right-0 text-center select-none pointer-events-none"
+      <div className="absolute top-8 left-0 right-0 text-center select-none pointer-events-none"
         style={{
           fontFamily: "'Bebas Neue', sans-serif",
-          fontSize: 'clamp(80px, 18vw, 220px)',
+          fontSize: 'clamp(60px, 18vw, 220px)',
           color: 'rgba(139,92,246,0.04)',
           letterSpacing: '0.1em', lineHeight: 1,
-        }}
-      >
+        }}>
         GITHUB
       </div>
 
@@ -485,7 +403,6 @@ export default function GitHubStats() {
         style={{ background: 'rgba(236,72,153,0.05)' }} />
 
       <div className="max-w-6xl mx-auto relative z-10">
-
         <SectionHeader number="02" title="github" />
 
         {loading ? (
@@ -502,13 +419,8 @@ export default function GitHubStats() {
         ) : (
           <div className="flex flex-col gap-12">
 
-            <div style={{
-              display: 'grid',
-              gridTemplateColumns: '1fr 1fr',
-              gap: '24px',
-              alignItems: 'stretch',
-            }}>
-
+            {/* ── Grid orbital + perfil — colapsa no mobile ── */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div
                 variants={fadeUp} custom={1} initial="hidden" whileInView="visible" viewport={{ once: true }}
                 style={{ display: 'flex', flexDirection: 'column' }}
@@ -529,50 +441,43 @@ export default function GitHubStats() {
               >
                 <SectionLabel>perfil</SectionLabel>
                 <div style={{
-                  flex: 1,
-                  padding: '28px',
+                  flex: 1, padding: '24px',
                   background: 'rgba(139,92,246,0.04)',
                   border: '0.5px solid rgba(139,92,246,0.2)',
                   borderLeft: '2px solid #a78bfa',
                   borderRadius: '8px',
                   display: 'flex', flexDirection: 'column', gap: '18px',
                 }}>
-
                   <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
                     {profile?.avatar_url ? (
-                      <img
-                        src={profile.avatar_url}
-                        alt={USERNAME}
-                        style={{
-                          width: '64px', height: '64px',
-                          borderRadius: '50%',
-                          border: '1.5px solid rgba(139,92,246,0.5)',
-                          objectFit: 'cover', flexShrink: 0,
-                        }}
-                      />
+                      <img src={profile.avatar_url} alt={USERNAME} style={{
+                        width: '56px', height: '56px', borderRadius: '50%',
+                        border: '1.5px solid rgba(139,92,246,0.5)',
+                        objectFit: 'cover', flexShrink: 0,
+                      }} />
                     ) : (
                       <div style={{
-                        width: '64px', height: '64px', borderRadius: '50%',
+                        width: '56px', height: '56px', borderRadius: '50%',
                         background: 'rgba(139,92,246,0.15)',
                         border: '1.5px solid rgba(139,92,246,0.4)',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                         fontFamily: "'Bebas Neue', sans-serif",
-                        fontSize: '24px', color: '#a78bfa', flexShrink: 0,
+                        fontSize: '20px', color: '#a78bfa', flexShrink: 0,
                       }}>EL</div>
                     )}
                     <div>
                       <div style={{
                         fontFamily: "'Bebas Neue', sans-serif",
-                        fontSize: '32px', color: '#f8f4ff',
+                        fontSize: 'clamp(20px, 5vw, 32px)', color: '#f8f4ff',
                         letterSpacing: '0.05em', lineHeight: 1,
                       }}>@erikalaiane</div>
                       <div style={{
                         fontFamily: "'Courier New', monospace",
-                        fontSize: '11px', fontWeight: 500,
+                        fontSize: '10px', fontWeight: 500,
                         color: 'rgba(167,139,250,0.7)',
-                        letterSpacing: '0.15em', marginTop: '4px',
+                        letterSpacing: '0.1em', marginTop: '4px',
                       }}>
-                        {profile?.bio || 'Front-end Developer · Creative Dev · Rio de Janeiro'}
+                        {profile?.bio || 'Front-end Developer · Creative Dev · RJ'}
                       </div>
                     </div>
                   </div>
@@ -581,62 +486,41 @@ export default function GitHubStats() {
                     {profile?.blog && (
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span style={{ color: '#a78bfa', fontSize: '11px' }}>✦</span>
-                        <span style={{
-                          fontFamily: "'Courier New', monospace",
-                          fontSize: '11px', fontWeight: 500,
-                          color: 'rgba(255,255,255,0.6)',
-                          letterSpacing: '0.05em',
-                        }}>{profile.blog}</span>
+                        <span style={{ fontFamily: "'Courier New', monospace", fontSize: '11px', fontWeight: 500, color: 'rgba(255,255,255,0.6)' }}>{profile.blog}</span>
                       </div>
                     )}
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span style={{ color: '#EC4899', fontSize: '11px' }}>✦</span>
-                      <span style={{
-                        fontFamily: "'Courier New', monospace",
-                        fontSize: '11px', fontWeight: 500,
-                        color: 'rgba(255,255,255,0.6)',
-                        letterSpacing: '0.05em',
-                      }}>📍 {profile?.location || 'Rio de Janeiro'}</span>
+                      <span style={{ fontFamily: "'Courier New', monospace", fontSize: '11px', fontWeight: 500, color: 'rgba(255,255,255,0.6)' }}>
+                        📍 {profile?.location || 'Rio de Janeiro'}
+                      </span>
                     </div>
                   </div>
 
                   <ReadmeSnippet />
 
-                  {/* ✅ CORRIGIDO: bg-purple-main substituído por style inline */}
                   <a
                     href={`https://github.com/${USERNAME}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="relative group overflow-hidden"
+                    target="_blank" rel="noreferrer"
                     style={{
                       fontFamily: "'Courier New', monospace",
                       fontSize: '11px', fontWeight: 600,
                       color: '#fff', letterSpacing: '0.2em', textTransform: 'uppercase',
                       textDecoration: 'none',
                       border: '0.5px solid #8B5CF6',
-                      padding: '12px 24px',
-                      marginTop: 'auto',
-                      display: 'inline-flex',
-                      alignItems: 'center', justifyContent: 'center',
-                      position: 'relative',
-                      overflow: 'hidden',
+                      padding: '12px 24px', marginTop: 'auto',
+                      display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                      position: 'relative', overflow: 'hidden',
                     }}
-                    onMouseEnter={e => {
-                      e.currentTarget.querySelector('.btn-fill').style.transform = 'translateY(0)'
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.querySelector('.btn-fill').style.transform = 'translateY(100%)'
-                    }}
+                    onMouseEnter={e => e.currentTarget.querySelector('.btn-fill').style.transform = 'translateY(0)'}
+                    onMouseLeave={e => e.currentTarget.querySelector('.btn-fill').style.transform = 'translateY(100%)'}
                   >
-                    <span
-                      className="btn-fill"
-                      style={{
-                        position: 'absolute', inset: 0,
-                        background: '#8B5CF6',
-                        transform: 'translateY(100%)',
-                        transition: 'transform 0.3s ease',
-                      }}
-                    />
+                    <span className="btn-fill" style={{
+                      position: 'absolute', inset: 0,
+                      background: '#8B5CF6',
+                      transform: 'translateY(100%)',
+                      transition: 'transform 0.3s ease',
+                    }} />
                     <span style={{ position: 'relative', zIndex: 1 }}>Ver GitHub ↗</span>
                   </a>
                 </div>
