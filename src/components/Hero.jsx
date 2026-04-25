@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { motion } from 'framer-motion'
+import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
 import heroImg from '../assets/images/hero.jpg'
 
 const containerVariants = {
@@ -37,6 +37,25 @@ const infos = [
 ]
 
 export default function Hero() {
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  const imgX = useSpring(useTransform(mouseX, [-1, 1], [-15, 15]), { stiffness: 100, damping: 30 })
+  const imgY = useSpring(useTransform(mouseY, [-1, 1], [-10, 10]), { stiffness: 100, damping: 30 })
+
+  function handleMouseMove(e) {
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width * 2 - 1
+    const y = (e.clientY - rect.top) / rect.height * 2 - 1
+    mouseX.set(x)
+    mouseY.set(y)
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(0)
+    mouseY.set(0)
+  }
+
   return (
     <section className="flex flex-col justify-center px-6 pb-5 pt-24 relative z-10">
       <div className="max-w-6xl mx-auto w-full flex flex-col gap-3">
@@ -46,17 +65,24 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
           className="relative rounded-2xl overflow-hidden"
           style={{
             height: '460px',
             border: '0.5px solid rgba(139,92,246,0.25)',
           }}
         >
-          {/* Imagem de fundo */}
-          <img
+          {/* Imagem de fundo com parallax */}
+          <motion.img
             src={heroImg}
             alt="workspace"
             className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              x: imgX,
+              y: imgY,
+              scale: 1.08,
+            }}
           />
 
           {/* Overlay */}
