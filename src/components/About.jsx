@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { motion } from 'framer-motion'
-import aboutImg from '../assets/images/about.jpg'
+import aboutImg from '../assets/images/about.webp'
 import SectionHeader from '../components/SectionHeader'
 
 const fadeUp = {
@@ -139,6 +139,7 @@ export default function About() {
           <img
             src={aboutImg}
             alt="Érika Laiane"
+            loading="lazy"
             className="w-full h-full object-cover"
             style={{ filter: 'contrast(1.05) brightness(0.88)' }}
           />

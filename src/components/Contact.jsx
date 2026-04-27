@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import contactImg from '../assets/images/contact.jpg'
+import contactImg from '../assets/images/contact.webp'
 import SectionHeader from '../components/SectionHeader'
 
 // ✅ Substitua pelo seu endpoint do Formspree
@@ -326,6 +326,7 @@ export default function Contact() {
                 <img
                   src={contactImg}
                   alt="Érika Laiane"
+                  loading="lazy"
                   className="w-full h-full object-cover object-top"
                   style={{ filter: 'contrast(1.1) brightness(0.8) saturate(0.9)' }}
                 />
