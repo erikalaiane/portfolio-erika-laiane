@@ -4,10 +4,6 @@ import { motion } from 'framer-motion'
 import contactImg from '../assets/images/contact.webp'
 import SectionHeader from '../components/SectionHeader'
 
-// ✅ Substitua pelo seu endpoint do Formspree
-// 1. Acesse formspree.io e crie uma conta gratuita
-// 2. Crie um novo Form com seu email
-// 3. Cole o endpoint aqui (ex: https://formspree.io/f/xyzabcde)
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mlgazoqn'
 
 const fadeUp = {
