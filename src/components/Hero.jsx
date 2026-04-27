@@ -1,20 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion'
-import heroImg from '../assets/images/hero.jpg'
+import heroImg from '../assets/images/hero.webp'
 
 const containerVariants = {
   hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12 },
-  },
+  visible: { transition: { staggerChildren: 0.12 } },
 }
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1, y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
 }
 
 const stacks = [
@@ -57,41 +52,431 @@ export default function Hero() {
     <section className="flex flex-col justify-center px-4 md:px-6 pb-5 pt-20 md:pt-24 relative z-10">
       <div className="max-w-6xl mx-auto w-full flex flex-col gap-3">
 
-        {/* ── BANNER PRINCIPAL ── */}
+        {/* ══════════════════════════════════════
+            MOBILE — < 768px
+        ══════════════════════════════════════ */}
+        <div className="flex flex-col gap-4 md:hidden">
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="relative rounded-2xl overflow-hidden h-48 min-[400px]:h-56 min-[500px]:h-64"
+            style={{ border: '0.5px solid rgba(139,92,246,0.25)' }}
+          >
+            <img
+              src={heroImg}
+              alt="portfolio illustration"
+              className="w-full h-full object-cover object-left"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to bottom, rgba(11,11,15,0.1) 0%, rgba(11,11,15,0.6) 100%)' }}
+            />
+            <div
+              className="absolute bottom-3 left-3 flex items-center gap-2 px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(17,24,39,0.9)',
+                border: '0.5px solid rgba(236,72,153,0.4)',
+                backdropFilter: 'blur(12px)',
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ background: '#EC4899', boxShadow: '0 0 6px rgba(236,72,153,0.8)', animation: 'pulse 2s ease-in-out infinite' }}
+              />
+              <span className="text-white font-medium whitespace-nowrap" style={{ fontSize: '10px', fontFamily: "'Inter', sans-serif" }}>
+                Open to work · Rio de Janeiro
+              </span>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="flex flex-col gap-3 px-1"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div variants={itemVariants} className="flex flex-col gap-0.5">
+              <span style={{ fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(139,92,246,0.95)', fontFamily: "'Courier New', monospace" }}>
+                — Credential
+              </span>
+              <span style={{ fontSize: '8px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', fontFamily: "'Courier New', monospace" }}>
+                Front-end Developer · Creative Dev
+              </span>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <h1
+                className="font-display text-white leading-none"
+                style={{ fontSize: 'clamp(36px, 11vw, 56px)', letterSpacing: '1px' }}
+              >
+                ERIKA LAIANE
+              </h1>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <p className="font-display animated-gradient-text" style={{ fontSize: '13px', letterSpacing: '2px' }}>
+                WHERE CODE MEETS DESIGN.
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <p className="font-body leading-relaxed" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.75)' }}>
+                Desenvolvo interfaces que as pessoas sentem — não só veem.
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex gap-3 flex-wrap">
+              <a
+                href="#projetos"
+                className="relative overflow-hidden font-body uppercase"
+                style={{
+                  fontSize: '10px', letterSpacing: '2px',
+                  padding: '10px 20px',
+                  border: '0.5px solid #8B5CF6',
+                  color: '#fff', textDecoration: 'none',
+                  display: 'inline-block', position: 'relative',
+                }}
+                onMouseEnter={e => e.currentTarget.querySelector('.fill-m').style.transform = 'translateY(0)'}
+                onMouseLeave={e => e.currentTarget.querySelector('.fill-m').style.transform = 'translateY(100%)'}
+              >
+                <span className="fill-m" style={{
+                  position: 'absolute', inset: 0, background: '#8B5CF6',
+                  transform: 'translateY(100%)', transition: 'transform 0.3s ease',
+                }} />
+                <span style={{ position: 'relative' }}>ver projetos</span>
+              </a>
+              <a
+                href="#contato"
+                className="font-body uppercase"
+                style={{
+                  fontSize: '10px', letterSpacing: '2px',
+                  padding: '10px 20px',
+                  border: '0.5px solid rgba(139,92,246,0.3)',
+                  color: 'rgba(255,255,255,0.6)',
+                  textDecoration: 'none', display: 'inline-block',
+                  transition: 'all 0.3s',
+                }}
+              >
+                contato →
+              </a>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="rounded-2xl p-4"
+            style={{
+              background: 'rgba(22,27,39,0.6)',
+              border: '0.5px solid rgba(139,92,246,0.15)',
+              backdropFilter: 'blur(12px)',
+            }}
+          >
+            <p style={{ fontSize: '8px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '10px' }}>
+              Stack & Ferramentas
+            </p>
+            <div className="grid grid-cols-3 gap-2">
+              {stacks.map((s) => (
+                <div
+                  key={s.name}
+                  className="flex items-center gap-1.5 px-2 py-2 rounded-lg"
+                  style={{ background: 'rgba(139,92,246,0.05)', border: '0.5px solid rgba(139,92,246,0.15)' }}
+                >
+                  <img src={s.icon} alt={s.name} style={{ width: '14px', height: '14px', objectFit: 'contain', flexShrink: 0 }} />
+                  <span className="font-body text-white" style={{ fontSize: '10px' }}>{s.name}</span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="grid grid-cols-2 gap-2"
+          >
+            {infos.map((info) => (
+              <div
+                key={info.label}
+                className="px-3 py-2.5 relative overflow-hidden rounded-xl"
+                style={{
+                  background: 'rgba(22,27,39,0.6)',
+                  border: '0.5px solid rgba(255,255,255,0.06)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                <p className="font-body tracking-widest mb-1 uppercase" style={{ fontSize: '7px', color: info.accent, letterSpacing: '0.2em' }}>
+                  {info.label}
+                </p>
+                <p className="font-body text-white font-medium" style={{ fontSize: '11px' }}>
+                  {info.value}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ══════════════════════════════════════
+            MÉDIO — 768px até 1024px
+        ══════════════════════════════════════ */}
+        <div className="hidden md:flex lg:hidden flex-col gap-4">
+
+          {/* Ilustração full-width */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="relative rounded-2xl overflow-hidden"
+            style={{
+              height: 'clamp(260px, 38vw, 360px)',
+              border: '0.5px solid rgba(139,92,246,0.25)',
+            }}
+          >
+            <img
+              src={heroImg}
+              alt="portfolio illustration"
+              className="w-full h-full object-cover object-center"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: 'linear-gradient(to bottom, rgba(11,11,15,0.05) 0%, rgba(11,11,15,0.55) 100%)' }}
+            />
+
+            {/* Tagline vertical */}
+            <div
+              className="absolute top-1/2 pointer-events-none select-none"
+              style={{
+                right: '16px',
+                transform: 'translateY(-50%) rotate(90deg)',
+                fontSize: '8px',
+                color: 'rgba(255,255,255,0.5)',
+                letterSpacing: '0.45em',
+                textTransform: 'uppercase',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Front-end Developer — Creative Dev — Rio de Janeiro
+            </div>
+
+            {/* Status pill */}
+            <div
+              className="absolute bottom-3 left-3 flex items-center gap-2 px-3 py-1.5 rounded-full"
+              style={{
+                background: 'rgba(17,24,39,0.9)',
+                border: '0.5px solid rgba(236,72,153,0.4)',
+                backdropFilter: 'blur(12px)',
+              }}
+            >
+              <span
+                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ background: '#EC4899', boxShadow: '0 0 6px rgba(236,72,153,0.8)', animation: 'pulse 2s ease-in-out infinite' }}
+              />
+              <span className="text-white font-medium whitespace-nowrap" style={{ fontSize: '10px', fontFamily: "'Inter', sans-serif" }}>
+                Open to work · Rio de Janeiro
+              </span>
+            </div>
+
+            {/* Card Kira Nox */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="absolute bottom-3 right-12 flex gap-3 items-center p-3 rounded-xl"
+              style={{
+                background: 'rgba(17,24,39,0.85)',
+                border: '0.5px solid rgba(139,92,246,0.3)',
+                backdropFilter: 'blur(12px)',
+                width: '200px',
+              }}
+            >
+              <div
+                className="w-9 h-9 rounded-lg flex-shrink-0 flex items-center justify-center text-base"
+                style={{ background: 'rgba(139,92,246,0.12)', border: '0.5px solid rgba(139,92,246,0.3)' }}
+              >
+                🎨
+              </div>
+              <div className="flex flex-col gap-0.5">
+                <span style={{ fontSize: '7px', color: 'rgba(139,92,246,0.8)', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+                  Projeto em destaque
+                </span>
+                <span className="font-display text-white" style={{ fontSize: '13px', letterSpacing: '1px' }}>
+                  KIRA NOX
+                </span>
+                <span style={{ fontSize: '8px', color: 'rgba(255,255,255,0.28)' }}>
+                  Sound Producer Portfolio
+                </span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Título + botões em duas colunas */}
+          <motion.div
+            className="grid grid-cols-2 gap-6 items-start"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {/* Coluna esquerda — título */}
+            <div className="flex flex-col gap-3">
+              <motion.div variants={itemVariants} className="flex flex-col gap-0.5">
+                <span style={{ fontSize: '9px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(139,92,246,0.95)', fontFamily: "'Courier New', monospace" }}>
+                  — Credential
+                </span>
+                <span style={{ fontSize: '8px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', fontFamily: "'Courier New', monospace" }}>
+                  Front-end Developer · Creative Dev
+                </span>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <h1
+                  className="font-display text-white leading-none"
+                  style={{ fontSize: 'clamp(40px, 7vw, 64px)', letterSpacing: '1px' }}
+                >
+                  ERIKA<br />LAIANE
+                </h1>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <p className="font-display animated-gradient-text" style={{ fontSize: 'clamp(11px, 1.8vw, 14px)', letterSpacing: '2px' }}>
+                  WHERE CODE MEETS DESIGN.
+                </p>
+              </motion.div>
+
+              <motion.div variants={itemVariants}>
+                <p className="font-body leading-relaxed" style={{ fontSize: '13px', color: 'rgba(255,255,255,0.75)' }}>
+                  Desenvolvo interfaces que as pessoas sentem — não só veem.
+                </p>
+              </motion.div>
+            </div>
+
+            {/* Coluna direita — botões + stack */}
+            <div className="flex flex-col gap-4 pt-2">
+              <motion.div variants={itemVariants} className="flex gap-3 flex-wrap">
+                <a
+                  href="#projetos"
+                  className="relative overflow-hidden font-body uppercase"
+                  style={{
+                    fontSize: '10px', letterSpacing: '2px',
+                    padding: '10px 20px',
+                    border: '0.5px solid #8B5CF6',
+                    color: '#fff', textDecoration: 'none',
+                    display: 'inline-block', position: 'relative',
+                  }}
+                  onMouseEnter={e => e.currentTarget.querySelector('.fill-t').style.transform = 'translateY(0)'}
+                  onMouseLeave={e => e.currentTarget.querySelector('.fill-t').style.transform = 'translateY(100%)'}
+                >
+                  <span className="fill-t" style={{
+                    position: 'absolute', inset: 0, background: '#8B5CF6',
+                    transform: 'translateY(100%)', transition: 'transform 0.3s ease',
+                  }} />
+                  <span style={{ position: 'relative' }}>ver projetos</span>
+                </a>
+                <a
+                  href="#contato"
+                  className="font-body uppercase"
+                  style={{
+                    fontSize: '10px', letterSpacing: '2px',
+                    padding: '10px 20px',
+                    border: '0.5px solid rgba(139,92,246,0.3)',
+                    color: 'rgba(255,255,255,0.6)',
+                    textDecoration: 'none', display: 'inline-block',
+                    transition: 'all 0.3s',
+                  }}
+                >
+                  contato →
+                </a>
+              </motion.div>
+
+              <motion.div
+                variants={itemVariants}
+                className="rounded-xl p-4"
+                style={{
+                  background: 'rgba(22,27,39,0.6)',
+                  border: '0.5px solid rgba(139,92,246,0.15)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                <p style={{ fontSize: '8px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.35em', textTransform: 'uppercase', marginBottom: '10px' }}>
+                  Stack
+                </p>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {stacks.map((s) => (
+                    <div
+                      key={s.name}
+                      className="flex items-center gap-1.5 px-2 py-1.5 rounded-lg"
+                      style={{ background: 'rgba(139,92,246,0.05)', border: '0.5px solid rgba(139,92,246,0.15)' }}
+                    >
+                      <img src={s.icon} alt={s.name} style={{ width: '13px', height: '13px', objectFit: 'contain', flexShrink: 0 }} />
+                      <span className="font-body text-white" style={{ fontSize: '10px' }}>{s.name}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Info cards em 4 colunas */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+            className="grid grid-cols-4 gap-2"
+          >
+            {infos.map((info) => (
+              <div
+                key={info.label}
+                className="px-3 py-2.5 relative overflow-hidden rounded-xl"
+                style={{
+                  background: 'rgba(22,27,39,0.6)',
+                  border: '0.5px solid rgba(255,255,255,0.06)',
+                  backdropFilter: 'blur(12px)',
+                }}
+              >
+                <p className="font-body tracking-widest mb-1 uppercase" style={{ fontSize: '7px', color: info.accent, letterSpacing: '0.2em' }}>
+                  {info.label}
+                </p>
+                <p className="font-body text-white font-medium" style={{ fontSize: '11px' }}>
+                  {info.value}
+                </p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* ══════════════════════════════════════
+            DESKTOP — 1024px+
+        ══════════════════════════════════════ */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative rounded-2xl overflow-hidden"
+          className="relative rounded-2xl overflow-hidden hidden lg:block"
           style={{
-            minHeight: '340px',
             height: 'clamp(340px, 55vw, 460px)',
             border: '0.5px solid rgba(139,92,246,0.25)',
           }}
         >
-          {/* Imagem de fundo com parallax */}
           <motion.img
             src={heroImg}
-            alt="workspace"
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ x: imgX, y: imgY, scale: 1.08 }}
+            alt="portfolio illustration"
+            className="absolute inset-0 h-full object-contain"
+            style={{ objectPosition: 'left center', x: imgX, y: imgY }}
           />
-
-          {/* Overlay — mais escuro no mobile pra texto ficar legível */}
           <div
             className="absolute inset-0"
-            style={{
-              background: 'linear-gradient(to right, rgba(17,24,39,0.98) 50%, rgba(17,24,39,0.4) 100%)',
-            }}
+            style={{ background: 'linear-gradient(to left, rgba(11,11,15,0.98) 25%, rgba(11,11,15,0.6) 50%, rgba(11,11,15,0.0) 65%)' }}
           />
 
-          {/* Tagline vertical — só desktop */}
+          {/* Tagline vertical */}
           <div
-            className="absolute top-1/2 -translate-y-1/2 pointer-events-none select-none hidden lg:block"
+            className="absolute top-1/2 pointer-events-none select-none"
             style={{
-              right: '40%',
+              right: 'clamp(80px, 10vw, 120px)',
               transform: 'translateY(-50%) rotate(90deg)',
               fontSize: '8px',
               color: 'rgba(255,255,255,0.7)',
@@ -103,123 +488,17 @@ export default function Hero() {
             Front-end Developer — Creative Dev — Rio de Janeiro
           </div>
 
-          {/* Estrelinhas decorativas */}
-          <div className="absolute top-4 right-4 flex gap-2 items-center">
+          {/* Estrelinhas */}
+          <div className="absolute top-4 flex gap-2 items-center" style={{ right: '60px' }}>
             <span style={{ fontSize: '18px', color: '#ffffff', filter: 'drop-shadow(0 0 6px #fff)' }}>✦</span>
             <span style={{ fontSize: '11px', color: '#a78bfa', filter: 'drop-shadow(0 0 5px #a78bfa)' }}>✦</span>
             <span style={{ fontSize: '14px', color: '#ffffff', filter: 'drop-shadow(0 0 6px #fff)' }}>⟡</span>
           </div>
 
-          {/* ── CONTEÚDO com stagger ── */}
-          <motion.div
-            className="absolute inset-0 flex flex-col justify-center gap-3 px-6 md:pl-14 md:pr-0"
-            style={{ maxWidth: '100%' }}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {/* 1. Credential */}
-            <motion.div variants={itemVariants} className="flex flex-col gap-1">
-              <span style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(139,92,246,0.95)' }}>
-                Credential —
-              </span>
-              <span style={{ fontSize: '8px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>
-                Front-end Developer · Creative Dev
-              </span>
-            </motion.div>
-
-            {/* 2. Título */}
-            <motion.div variants={itemVariants}>
-              <h1
-                className="font-display text-white leading-none"
-                style={{ fontSize: 'clamp(40px, 10vw, 76px)', letterSpacing: '1px' }}
-              >
-                ERIKA<br />LAIANE
-              </h1>
-            </motion.div>
-
-            {/* 3. Subtítulo gradiente animado */}
-            <motion.div variants={itemVariants}>
-              <p
-                className="font-display animated-gradient-text"
-                style={{ fontSize: 'clamp(11px, 2.5vw, 16px)', letterSpacing: '2px' }}
-              >
-                WHERE CODE MEETS DESIGN.
-              </p>
-            </motion.div>
-
-            {/* 4. Descrição — esconde no mobile muito pequeno */}
-            <motion.div variants={itemVariants} className="hidden sm:block">
-              <p
-                className="font-body leading-relaxed"
-                style={{ fontSize: '12px', color: 'rgba(255,255,255,0.58)', maxWidth: '260px' }}
-              >
-                Desenvolvo interfaces que as pessoas sentem — não só veem.
-              </p>
-            </motion.div>
-
-            {/* 5. Botões */}
-            <motion.div variants={itemVariants} className="flex gap-3 mt-1 flex-wrap">
-              <a
-                href="#projetos"
-                className="relative group overflow-hidden font-body uppercase"
-                style={{
-                  fontSize: '10px', letterSpacing: '2px',
-                  padding: '9px 18px',
-                  border: '0.5px solid #8B5CF6',
-                  color: '#fff', textDecoration: 'none',
-                  display: 'inline-block', position: 'relative',
-                }}
-                onMouseEnter={e => e.currentTarget.querySelector('.fill').style.transform = 'translateY(0)'}
-                onMouseLeave={e => e.currentTarget.querySelector('.fill').style.transform = 'translateY(100%)'}
-              >
-                <span className="fill" style={{
-                  position: 'absolute', inset: 0,
-                  background: '#8B5CF6',
-                  transform: 'translateY(100%)',
-                  transition: 'transform 0.3s ease',
-                }} />
-                <span style={{ position: 'relative' }}>ver projetos</span>
-              </a>
-              <a
-                href="#contato"
-                className="font-body uppercase"
-                style={{
-                  fontSize: '10px', letterSpacing: '2px',
-                  padding: '9px 18px',
-                  border: '0.5px solid rgba(139,92,246,0.3)',
-                  color: 'rgba(255,255,255,0.5)',
-                  textDecoration: 'none', display: 'inline-block',
-                  transition: 'all 0.3s',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = 'rgba(139,92,246,0.7)'
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.8)'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)'
-                  e.currentTarget.style.color = 'rgba(255,255,255,0.4)'
-                }}
-              >
-                contato →
-              </a>
-            </motion.div>
-
-            {/* 6. Scroll hint */}
-            <motion.div variants={itemVariants} className="flex items-center gap-3 mt-1">
-              <div className="w-7 h-px" style={{ background: '#8B5CF6' }} />
-              <span style={{ fontSize: '8px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)' }}>
-                scroll to explore
-              </span>
-              <span style={{ color: '#8B5CF6', fontSize: '11px' }}>↓</span>
-            </motion.div>
-          </motion.div>
-
-          {/* ── Cards flutuantes — só desktop ── */}
-          <div className="absolute bottom-4 right-4 flex-col gap-2 items-end hidden md:flex">
-
+          {/* Cards flutuantes */}
+          <div className="absolute left-4 flex flex-col items-start" style={{ bottom: '16px', gap: '6px' }}>
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
               whileHover={{ y: -2 }}
@@ -241,11 +520,7 @@ export default function Hero() {
             >
               <span
                 className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{
-                  background: '#EC4899',
-                  boxShadow: '0 0 6px rgba(236,72,153,0.8)',
-                  animation: 'pulse 2s ease-in-out infinite',
-                }}
+                style={{ background: '#EC4899', boxShadow: '0 0 6px rgba(236,72,153,0.8)', animation: 'pulse 2s ease-in-out infinite' }}
               />
               <span className="font-body text-white font-medium whitespace-nowrap" style={{ fontSize: '10px' }}>
                 Open to work · Rio de Janeiro
@@ -253,7 +528,7 @@ export default function Hero() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 1.0 }}
               whileHover={{ y: -2 }}
@@ -276,10 +551,7 @@ export default function Hero() {
             >
               <div
                 className="w-11 h-11 rounded-lg flex-shrink-0 flex items-center justify-center text-lg"
-                style={{
-                  background: 'rgba(139,92,246,0.12)',
-                  border: '0.5px solid rgba(139,92,246,0.3)',
-                }}
+                style={{ background: 'rgba(139,92,246,0.12)', border: '0.5px solid rgba(139,92,246,0.3)' }}
               >
                 🎨
               </div>
@@ -296,16 +568,102 @@ export default function Hero() {
               </div>
             </motion.div>
           </div>
+
+          {/* Conteúdo texto */}
+          <motion.div
+            className="absolute inset-0 flex flex-col justify-center gap-2 lg:gap-3 pr-8 lg:pr-14"
+            style={{ alignItems: 'flex-end', textAlign: 'right', maxWidth: '48%', marginLeft: 'auto' }}
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <motion.div variants={itemVariants} className="flex flex-col gap-1">
+              <span style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(139,92,246,0.95)' }}>
+                — Credential
+              </span>
+              <span style={{ fontSize: '8px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)' }}>
+                Front-end Developer · Creative Dev
+              </span>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <h1 className="font-display text-white leading-none" style={{ fontSize: 'clamp(28px, 5.5vw, 76px)', letterSpacing: '1px' }}>
+                ERIKA<br />LAIANE
+              </h1>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <p className="font-display animated-gradient-text" style={{ fontSize: 'clamp(11px, 2vw, 16px)', letterSpacing: '2px' }}>
+                WHERE CODE MEETS DESIGN.
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <p className="font-body leading-relaxed" style={{ fontSize: '12px', color: 'rgba(255,255,255,0.82)', maxWidth: '260px' }}>
+                Desenvolvo interfaces que as pessoas sentem — não só veem.
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex gap-3 mt-1 flex-wrap justify-end">
+              <a
+                href="#contato"
+                className="font-body uppercase"
+                style={{
+                  fontSize: '10px', letterSpacing: '2px',
+                  padding: '9px 18px',
+                  border: '0.5px solid rgba(139,92,246,0.3)',
+                  color: 'rgba(255,255,255,0.5)',
+                  textDecoration: 'none', display: 'inline-block', transition: 'all 0.3s',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = 'rgba(139,92,246,0.7)'
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.8)'
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = 'rgba(139,92,246,0.3)'
+                  e.currentTarget.style.color = 'rgba(255,255,255,0.4)'
+                }}
+              >
+                contato →
+              </a>
+              <a
+                href="#projetos"
+                className="relative overflow-hidden font-body uppercase"
+                style={{
+                  fontSize: '10px', letterSpacing: '2px',
+                  padding: '9px 18px',
+                  border: '0.5px solid #8B5CF6',
+                  color: '#fff', textDecoration: 'none',
+                  display: 'inline-block', position: 'relative',
+                }}
+                onMouseEnter={e => e.currentTarget.querySelector('.fill-d').style.transform = 'translateY(0)'}
+                onMouseLeave={e => e.currentTarget.querySelector('.fill-d').style.transform = 'translateY(100%)'}
+              >
+                <span className="fill-d" style={{
+                  position: 'absolute', inset: 0, background: '#8B5CF6',
+                  transform: 'translateY(100%)', transition: 'transform 0.3s ease',
+                }} />
+                <span style={{ position: 'relative' }}>ver projetos</span>
+              </a>
+            </motion.div>
+
+            <motion.div variants={itemVariants} className="flex items-center gap-3 mt-1 justify-end">
+              <span style={{ color: '#8B5CF6', fontSize: '11px' }}>↓</span>
+              <span style={{ fontSize: '8px', letterSpacing: '0.4em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.7)' }}>
+                scroll to explore
+              </span>
+              <div className="w-7 h-px" style={{ background: '#8B5CF6' }} />
+            </motion.div>
+          </motion.div>
         </motion.div>
 
-        {/* ── GRID INFERIOR ── */}
+        {/* ── GRID INFERIOR — desktop only ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1.1 }}
-          className="grid gap-3 grid-cols-1 md:grid-cols-2"
+          className="hidden lg:grid gap-3 grid-cols-2"
         >
-          {/* STACK */}
           <div
             className="rounded-2xl p-5"
             style={{
@@ -322,11 +680,7 @@ export default function Hero() {
                 <div
                   key={s.name}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer"
-                  style={{
-                    background: 'rgba(139,92,246,0.05)',
-                    border: '0.5px solid rgba(139,92,246,0.15)',
-                    transition: 'all 0.25s',
-                  }}
+                  style={{ background: 'rgba(139,92,246,0.05)', border: '0.5px solid rgba(139,92,246,0.15)', transition: 'all 0.25s' }}
                   onMouseEnter={e => {
                     e.currentTarget.style.background = 'rgba(139,92,246,0.12)'
                     e.currentTarget.style.borderColor = 'rgba(139,92,246,0.4)'
@@ -345,7 +699,6 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* INFO */}
           <div className="flex flex-col gap-2">
             <p style={{ fontSize: '8px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.35em', textTransform: 'uppercase' }}>
               Info
@@ -384,7 +737,6 @@ export default function Hero() {
               ))}
             </div>
 
-            {/* Wide card */}
             <div
               className="px-4 py-3 flex items-center justify-between relative overflow-hidden cursor-pointer group rounded-xl"
               style={{
@@ -414,7 +766,7 @@ export default function Hero() {
                 <span style={{ fontSize: '8px', color: 'rgba(139,92,246,0.7)', border: '0.5px solid rgba(139,92,246,0.3)', padding: '3px 8px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                   React
                 </span>
-                <span className="hidden sm:inline" style={{ fontSize: '8px', color: 'rgba(139,92,246,0.7)', border: '0.5px solid rgba(139,92,246,0.3)', padding: '3px 8px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                <span style={{ fontSize: '8px', color: 'rgba(139,92,246,0.7)', border: '0.5px solid rgba(139,92,246,0.3)', padding: '3px 8px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                   Em progresso
                 </span>
               </div>
