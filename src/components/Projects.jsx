@@ -2,6 +2,13 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SectionHeader from '../components/SectionHeader'
+import projKira from '../assets/images/proj-kira.jpg'
+import projAcelera from '../assets/images/proj-acelera.jpg'
+import projHofin from '../assets/images/proj-hofin.jpg'
+import projCards from '../assets/images/proj-cards.jpg'
+import projMusic from '../assets/images/proj-music.jpg'
+import projXg from '../assets/images/proj-xg.jpg'
+import projStyle from '../assets/images/proj-style.jpg'
 
 const projects = [
   {
@@ -12,7 +19,7 @@ const projects = [
     desc: 'Portfólio fictício de uma produtora musical experimental com design vintage, glassmorphism e carrosséis animados.',
     longDesc: 'Um projeto conceitual que explora a identidade visual de uma produtora musical experimental. O design mistura estética vintage com glassmorphism moderno, criando uma experiência imersiva com loading screen, carrosséis animados e tipografia forte.',
     stack: ['React', 'Vite', 'Tailwind'],
-    cover: '/src/assets/images/proj-kira.jpg',
+    cover: projKira,
     github: 'https://github.com/erikalaiane/kira-nox',
     demo: 'https://erikalaiane.github.io/kira-nox/',
   },
@@ -24,7 +31,7 @@ const projects = [
     desc: 'Hub fictício de automobilismo do Rio de Janeiro com simuladores, marketplace e sistema de assinatura.',
     longDesc: 'Hub conceitual de automobilismo inspirado nas equipes de F1. Conta com seções de simuladores, marketplace de peças, calendário de eventos e sistema de assinatura com diferentes planos. Design inspirado na estética de equipes de corrida.',
     stack: ['React', 'Vite', 'Tailwind'],
-    cover: '/src/assets/images/proj-acelera.jpg',
+    cover: projAcelera,
     github: 'https://github.com/erikalaiane/acelera-club',
     demo: 'https://erikalaiane.github.io/acelera-club/',
   },
@@ -36,7 +43,7 @@ const projects = [
     desc: 'Website imobiliário com estética minimalista e foco em tipografia e espaçamento.',
     longDesc: 'Landing page imobiliária com identidade visual limpa e sofisticada. O projeto prioriza hierarquia tipográfica, espaçamento generoso e uma paleta de cores neutra que transmite confiança e elegância.',
     stack: ['React', 'Tailwind'],
-    cover: '/src/assets/images/proj-hofin.jpg',
+    cover: projHofin,
     github: 'https://github.com/erikalaiane/hofin-real-estate-website',
     demo: null,
   },
@@ -48,7 +55,7 @@ const projects = [
     desc: 'Experimento de layout com cards interativos e composição visual criativa.',
     longDesc: 'Experimento de UI explorando diferentes composições de cards com interações criativas. O projeto foca em microinterações, hover effects e layouts dinâmicos que quebram o padrão convencional.',
     stack: ['HTML', 'CSS', 'JavaScript'],
-    cover: '/src/assets/images/proj-cards.jpg',
+    cover: projCards,
     github: 'https://github.com/erikalaiane/card-layout',
     demo: null,
   },
@@ -60,7 +67,7 @@ const projects = [
     desc: 'Player de música com interface customizada e animações suaves.',
     longDesc: 'Componente de player de música com design totalmente customizado. Inclui controles de reprodução, barra de progresso animada, visualização de capa do álbum e transições suaves entre estados.',
     stack: ['HTML', 'CSS', 'JavaScript'],
-    cover: '/src/assets/images/proj-music.jpg',
+    cover: projMusic,
     github: 'https://github.com/erikalaiane/music-player',
     demo: null,
   },
@@ -72,7 +79,7 @@ const projects = [
     desc: 'Hero section conceitual inspirada no álbum GALA do grupo XG.',
     longDesc: 'Hero section conceitual criada como homenagem ao álbum GALA do grupo XG. O design captura a estética futurista e intensa do projeto musical com tipografia bold, efeitos de luz e composição dramática.',
     stack: ['HTML', 'CSS', 'JavaScript'],
-    cover: '/src/assets/images/proj-xg.jpg',
+    cover: projXg,
     github: 'https://github.com/erikalaiane/xg-gala-hero',
     demo: null,
   },
@@ -84,7 +91,7 @@ const projects = [
     desc: 'Landing page de moda com identidade visual forte e layout editorial.',
     longDesc: 'Landing page para marca de moda conceitual com estética editorial forte. O layout explora assimetria, tipografia expressiva e uma paleta de cores ousada para criar uma presença visual marcante.',
     stack: ['HTML', 'CSS'],
-    cover: '/src/assets/images/proj-style.jpg',
+    cover: projStyle,
     github: 'https://github.com/erikalaiane/stylesync-landing',
     demo: null,
   },
