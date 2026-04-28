@@ -2,13 +2,13 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import SectionHeader from '../components/SectionHeader'
-import projKira from '../assets/images/proj-kira.jpg'
-import projAcelera from '../assets/images/proj-acelera.jpg'
-import projHofin from '../assets/images/proj-hofin.jpg'
-import projCards from '../assets/images/proj-cards.jpg'
-import projMusic from '../assets/images/proj-music.jpg'
-import projXg from '../assets/images/proj-xg.jpg'
-import projStyle from '../assets/images/proj-style.jpg'
+import projKira from '../assets/images/proj-kira.webp'
+import projAcelera from '../assets/images/proj-acelera.webp'
+import projHofin from '../assets/images/proj-hofin.webp'
+import projCards from '../assets/images/proj-cards.webp'
+import projMusic from '../assets/images/proj-music.webp'
+import projXg from '../assets/images/proj-xg.webp'
+import projStyle from '../assets/images/proj-style.webp'
 
 const projects = [
   {

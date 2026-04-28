@@ -66,6 +66,7 @@ export default function Hero() {
           >
             <img
               src={heroImg}
+              fetchpriority="high"
               alt="portfolio illustration"
               className="w-full h-full object-cover object-left"
             />

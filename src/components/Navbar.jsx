@@ -82,6 +82,7 @@ export default function Navbar() {
         {/* HAMBURGUER mobile */}
         <button
           className="md:hidden text-white"
+          aria-label="Abrir menu"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           <div className="flex flex-col gap-1.5">
